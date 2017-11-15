@@ -4,27 +4,45 @@ using UnityEngine;
 
 public class FeedbackProvider : MonoBehaviour {
 
-	public GameObject feedback;
+	public GameObject feedbackObject;
 	public UDPReceive udpreceiver;
+	public TouchInterpreter touchInterpreter;
 
-	private GameObject activeFeedback;
+	public float sceneBoundMinY = -4.5f;
+	public float sceneBoundMaxY = 4.5f;
+
+	public float sceneBoundMinX = -8.5f;
+	public float sceneBoundMaxX = 8.5f;
+
+	private List<GameObject> activeFeedback;
 	// Use this for initialization
 	void Start () {
-		
+		activeFeedback = new List<GameObject> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
-		if (Input.GetMouseButtonDown (0)) {
-			if (activeFeedback != null) Destroy(activeFeedback);
-			
-			Vector3 pos = Input.mousePosition;
-			Debug.Log (pos);
-			pos = Camera.main.ScreenToWorldPoint (pos);
-			pos.z = 0;
-			activeFeedback = Instantiate (feedback, pos, Quaternion.identity);
+		destroyFeedback ();
+		List<Vector2> touches = touchInterpreter.getTouchPoints ();
+		foreach (Vector2 location in touches) {
+			Debug.Log ("adding feedback at " + location);
+			activeFeedback.Add(Instantiate (feedbackObject, new Vector2(scalePointX(location.x), scalePointY(location.y)), Quaternion.identity));
 		}
 	}
 
+	private float scalePointX(float point) {
+		return Mathf.Lerp (sceneBoundMinX, sceneBoundMaxX, point);
+	}
+
+	private float scalePointY(float point) {
+		return Mathf.Lerp (sceneBoundMinY, sceneBoundMaxY, point);
+	}
+
+	private void destroyFeedback() {
+		foreach (GameObject fb in activeFeedback) {
+			if (fb != null) Destroy (fb);
+		}
+	}
 }
+
+
