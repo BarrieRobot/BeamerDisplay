@@ -16,10 +16,11 @@ public class TouchInterpreter : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		touchPoints.Clear ();
 		if (receiver != null) {
-			touchPoints.Clear ();
 			JSONArray points = receiver.getLastCursors ();
 			if (points != null) {
+				Debug.Log ("points there");
 				foreach (object p in points) {
 					JSONNode point = JSON.Parse (p.ToString ());
 					//	Debug.Log (point.AsArray[0].AsFloat + " " + point.AsArray[1].AsFloat);
