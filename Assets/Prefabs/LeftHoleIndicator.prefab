@@ -9,18 +9,18 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1522246462027468}
+  m_RootGameObject: {fileID: 1487726697599338}
   m_IsPrefabParent: 1
---- !u!1 &1037245958491552
+--- !u!1 &1096569668336576
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 224013356417987034}
-  - component: {fileID: 222572782662426054}
-  - component: {fileID: 114387414855387910}
+  - component: {fileID: 224925008522395374}
+  - component: {fileID: 222284852721835084}
+  - component: {fileID: 114021290184619266}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -28,42 +28,42 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1522246462027468
+--- !u!1 &1487726697599338
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4781990023734408}
-  - component: {fileID: 212615601364767378}
+  - component: {fileID: 4133129524983072}
+  - component: {fileID: 212868801700359590}
   m_Layer: 5
-  m_Name: LeftButton
+  m_Name: LeftHoleIndicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4781990023734408
+--- !u!4 &4133129524983072
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1522246462027468}
+  m_GameObject: {fileID: 1487726697599338}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.87, y: 1.38, z: 5.567}
-  m_LocalScale: {x: 13.86626, y: 13.866261, z: 13.866261}
+  m_LocalPosition: {x: -13.82, y: -15.28, z: 5.567}
+  m_LocalScale: {x: 50, y: 50, z: 13.866261}
   m_Children:
-  - {fileID: 224013356417987034}
+  - {fileID: 224925008522395374}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114387414855387910
+--- !u!114 &114021290184619266
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1037245958491552}
+  m_GameObject: {fileID: 1096569668336576}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
@@ -91,12 +91,12 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Left
---- !u!212 &212615601364767378
+--- !u!212 &212868801700359590
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1522246462027468}
+  m_GameObject: {fileID: 1487726697599338}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -125,7 +125,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -135,23 +135,23 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
---- !u!222 &222572782662426054
+--- !u!222 &222284852721835084
 CanvasRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1037245958491552}
---- !u!224 &224013356417987034
+  m_GameObject: {fileID: 1096569668336576}
+--- !u!224 &224925008522395374
 RectTransform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1037245958491552}
+  m_GameObject: {fileID: 1096569668336576}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.43}
   m_LocalScale: {x: 1, y: 0.7500003, z: 1}
   m_Children: []
-  m_Father: {fileID: 4781990023734408}
+  m_Father: {fileID: 4133129524983072}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
