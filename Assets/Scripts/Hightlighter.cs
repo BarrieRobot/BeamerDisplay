@@ -21,20 +21,18 @@ public class Hightlighter : MonoBehaviour {
 		//spawnedHighlight= Instantiate (highlight);
 		//spawnedHighlight.transform.SetParent(canvas.transform, false);
 		//spawnedHighlight.transform.localPosition = NFCLocation;
-
-		RightHoleIndication.SetActive (false);
-		LeftHoleIndication.SetActive (false);
+		ResetScene();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		switch (CurrentState.currentState) {
 		case State.WAIT_FOR_NFC:
-			enableNFCHighlight ();
+			ResetScene ();
 			break;
 		case State.SELECTING:
 			disableNFCHighlight ();
-			enableButtons ();
+			enableCategoryButtons ();
 			break;
 		default:
 			break;
@@ -55,7 +53,23 @@ public class Hightlighter : MonoBehaviour {
 		}
 	}
 
-	public void enableButtons() {
+	public void enableNavigationButtons() {
+		LeftButton.SetActive (true);
+		RightButton.SetActive (true);
+		SelectButton.SetActive (true);
+	}
 
+	public void enableCategoryButtons() {
+		RightHoleIndication.SetActive (true);
+		LeftHoleIndication.SetActive (true);
+	}
+
+	public void ResetScene() {
+		RightHoleIndication.SetActive (false);
+		LeftHoleIndication.SetActive (false);
+		LeftButton.SetActive (false);
+		RightButton.SetActive (false);
+		SelectButton.SetActive (false);
+		enableNFCHighlight ();
 	}
 }
