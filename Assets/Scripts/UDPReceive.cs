@@ -44,11 +44,17 @@ public class UDPReceive : MonoBehaviour {
 		init();
 	}
 
+	float tmptimer = 0;
 	public void Update() {
 		rfidTimer += Time.deltaTime;
 		if (rfidTimer > resetRFIDIDTimeout) {
 			rfidTimer = 0;
 			lastReceivedRFIDID = -1;
+		}
+
+		tmptimer += Time.deltaTime;
+		if (tmptimer > 4) {
+			lastReceivedRFIDID = 9999;
 		}
 	}
 

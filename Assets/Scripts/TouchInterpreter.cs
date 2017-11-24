@@ -8,6 +8,8 @@ using System.IO;
 public class TouchInterpreter : MonoBehaviour {
 
 	public UDPReceive receiver;
+	public StateManager stateManager;
+
 	List<Vector2> touchPoints = new List<Vector2>();
 	public string configPath = "/home/jonathan/git/BarrieBeamerDisplay/Assets/Resources/test.txt";
 
@@ -19,6 +21,16 @@ public class TouchInterpreter : MonoBehaviour {
 
 	public Vector2 selectButtonBoundsMin;
 	public Vector2 selectButtonBoundsMax;
+
+	public Vector2 HotSelectionMin;
+	public Vector2 HotSelectionMax;
+
+	public Vector2 ColdSelectionMin;
+	public Vector2 ColdSelectionMax;
+
+	private bool RightButtonTouched = false;
+	private bool LeftButtonTouched = false;
+	private bool SelectButtonTouched = false;
 
 	// Use this for initialization
 	void Start () {
@@ -48,10 +60,17 @@ public class TouchInterpreter : MonoBehaviour {
 				selectButtonBoundsMin = new Vector2 (float.Parse (min [0]), float.Parse (min [1]));
 				selectButtonBoundsMax = new Vector2 (float.Parse (max [0]), float.Parse (max [1]));
 				break;
+			case "HotSelection":
+				HotSelectionMin = new Vector2 (float.Parse (min [0]), float.Parse (min [1]));
+				HotSelectionMax = new Vector2 (float.Parse (max [0]), float.Parse (max [1]));
+				break;
+			case "ColdSelection":
+				ColdSelectionMin = new Vector2 (float.Parse (min [0]), float.Parse (min [1]));
+				ColdSelectionMax = new Vector2 (float.Parse (max [0]), float.Parse (max [1]));
+				break;
 			default:
 				break;
 			}
-
 		}
 	}
 
@@ -65,7 +84,24 @@ public class TouchInterpreter : MonoBehaviour {
 				foreach (object p in points) {
 					JSONNode point = JSON.Parse (p.ToString ());
 					//	Debug.Log (point.AsArray[0].AsFloat + " " + point.AsArray[1].AsFloat);
-					touchPoints.Add (new Vector2 (point.AsArray [0].AsFloat, point.AsArray [1].AsFloat));
+					Vector2 pointVec = new Vector2 (point.AsArray [0].AsFloat, point.AsArray [1].AsFloat);
+					touchPoints.Add (pointVec);
+
+					if (isTouchInBounds (pointVec, leftButtonBoundsMin, leftButtonBoundsMax)) {
+						LeftButtonTouched = true;
+					} else if (isTouchInBounds (pointVec, rightButtonBoundsMin, rightButtonBoundsMax)) {
+						RightButtonTouched = true;
+					} else if (isTouchInBounds (pointVec, selectButtonBoundsMin, selectButtonBoundsMax)) {
+						SelectButtonTouched = true;
+					} else if (CurrentState.currentState.Equals(State.CHOOSING_CATEGORY) 
+						&& (isTouchInBounds(pointVec, HotSelectionMin, HotSelectionMax) ||
+						isTouchInBounds(pointVec, ColdSelectionMin, ColdSelectionMax))) {
+						stateManager.ChangeState (State.SELECTING);
+					} else {
+						LeftButtonTouched = false;
+						RightButtonTouched = false;
+						SelectButtonTouched = false;
+					}
 				}
 			}
 		}
@@ -85,6 +121,14 @@ public class TouchInterpreter : MonoBehaviour {
 		Vector2 result = new Vector2 (sumX / touchPoints.Count, sumY / touchPoints.Count);
 		Debug.Log ("Average hit is: [" + result.x + ", " + result.y + "]");
 		return result;
+	}
+
+	bool isTouchInBounds(Vector2 touch, Vector2 minBound, Vector2 maxBound) {
+		if (touch.x > minBound.x && touch.x < maxBound.x
+			&& touch.y > minBound.y && touch.y < maxBound.y) {
+			return true;
+		}
+		return false;
 	}
 
 	public Vector2 getScaledAverageTouchPoint () {

@@ -6,6 +6,7 @@ using SimpleJSON;
 public class StateManager : MonoBehaviour {
 
 	public UDPReceive udpreceiver;
+	public TouchInterpreter touchInput;
 
 	// Use this for initialization
 	void Start () {
@@ -26,11 +27,15 @@ public class StateManager : MonoBehaviour {
 		}
 	}
 
+	public void ChangeState(State newState) {
+		CurrentState.currentState = newState;
+	}
+
 	void ReceiveStateChange() {
 		if (udpreceiver != null) {
 			int rfidid = udpreceiver.getLastReceivedRFID ();
 			if (rfidid != null && rfidid != -1) {
-				CurrentState.currentState = State.SELECTING;
+				CurrentState.currentState = State.CHOOSING_CATEGORY;
 			} else {
 				CurrentState.currentState = State.WAIT_FOR_NFC;
 			}
