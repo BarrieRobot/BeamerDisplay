@@ -18,7 +18,8 @@ public class Hightlighter : MonoBehaviour {
 
 	public GameObject HotDrinkIndicatorActive;
 	public GameObject ColdDrinkIndicatorActive;
-
+	public GameObject HotDrinkIndicatorInactive;
+	public GameObject ColdDrinkIndicatorInactive;
 	public GameObject canvas;
 
 	private bool NFCHighlighenabled = false;
@@ -43,7 +44,9 @@ public class Hightlighter : MonoBehaviour {
 			break;
 		case State.SELECTING:
 			disableNFCHighlight ();
+			disableCategorySelection ();
 			enableNavigation ();
+			activateCorrectIndicator ();
 			break;
 		default:
 			break;
@@ -70,6 +73,26 @@ public class Hightlighter : MonoBehaviour {
 		}
 	}
 
+	public void disableCategorySelection() {
+		SelectTypeInfo.SetActive (false);
+	}
+
+	public void activateCorrectIndicator () {
+		if (CurrentState.drink.Equals (Drink.HOT)) {
+			ColdDrinkIndicatorActive.SetActive (false);
+			ColdDrinkIndicatorInactive.SetActive (true);
+			HotDrinkIndicatorActive.SetActive (true);
+			HotDrinkIndicatorInactive.SetActive (false);
+		} else if (CurrentState.drink.Equals (Drink.COLD)) {
+			ColdDrinkIndicatorActive.SetActive (true);
+			ColdDrinkIndicatorInactive.SetActive (false);
+			HotDrinkIndicatorActive.SetActive (false);
+			HotDrinkIndicatorInactive.SetActive (true);
+		} else {
+			Debug.LogError ("No active drink?");
+		}
+	}
+
 	public void enableNavigation() {
 		LeftButton.SetActive (true);
 		RightButton.SetActive (true);
@@ -88,8 +111,10 @@ public class Hightlighter : MonoBehaviour {
 	}
 
 	public void ResetScene() {
-		ColdDrinkIndicatorActive.SetActive (true);
+		ColdDrinkIndicatorActive.SetActive (false);
 		HotDrinkIndicatorActive.SetActive (false);
+		HotDrinkIndicatorInactive.SetActive (false);
+		ColdDrinkIndicatorInactive.SetActive (false);
 		SelectTypeInfo.SetActive (false);
 		RightHoleIndication.SetActive (true);
 		LeftHoleIndication.SetActive (true);
