@@ -8,7 +8,6 @@ using System.IO;
 public class TouchInterpreter : MonoBehaviour {
 
 	public UDPReceive receiver;
-	public StateManager stateManager;
 
 	List<Vector2> touchPoints = new List<Vector2>();
 	public string configPath = "/home/jonathan/git/BarrieBeamerDisplay/Assets/Resources/test.txt";
@@ -80,13 +79,14 @@ public class TouchInterpreter : MonoBehaviour {
 		if (receiver != null) {
 			JSONArray points = receiver.getLastCursors ();
 			if (points != null) {
-				Debug.Log ("points there");
+				//Debug.Log ("points there");
+
 				foreach (object p in points) {
 					JSONNode point = JSON.Parse (p.ToString ());
 					//	Debug.Log (point.AsArray[0].AsFloat + " " + point.AsArray[1].AsFloat);
 					Vector2 pointVec = new Vector2 (point.AsArray [0].AsFloat, point.AsArray [1].AsFloat);
 					touchPoints.Add (pointVec);
-
+					/*
 					if (isTouchInBounds (pointVec, leftButtonBoundsMin, leftButtonBoundsMax)) {
 						LeftButtonTouched = true;
 					} else if (isTouchInBounds (pointVec, rightButtonBoundsMin, rightButtonBoundsMax)) {
@@ -101,7 +101,7 @@ public class TouchInterpreter : MonoBehaviour {
 						LeftButtonTouched = false;
 						RightButtonTouched = false;
 						SelectButtonTouched = false;
-					}
+					}*/
 				}
 			}
 		}

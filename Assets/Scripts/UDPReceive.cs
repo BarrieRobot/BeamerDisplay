@@ -54,6 +54,7 @@ public class UDPReceive : MonoBehaviour {
 
 		tmptimer += Time.deltaTime;
 		if (tmptimer > 4) {
+			tmptimer = -9999;
 			lastReceivedRFIDID = 9999;
 		}
 	}
@@ -100,7 +101,7 @@ public class UDPReceive : MonoBehaviour {
 	void ParseData() {
 		JSONNode data = JSON.Parse(lastReceivedUDPPacket);
 		if (data != null) {
-			Debug.Log ("data received");
+			//Debug.Log ("data received");
 			if (data ["cursors"] != null) {
 				lastReceivedCursors = data ["cursors"].AsArray;
 			} else if (data ["rfid"] != null) {

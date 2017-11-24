@@ -25,7 +25,7 @@ public class FeedbackProvider : MonoBehaviour {
 		destroyFeedback ();
 		List<Vector2> touches = touchInterpreter.getTouchPoints ();
 		foreach (Vector2 location in touches) {
-			Debug.Log ("adding feedback at " + location);
+			//Debug.Log ("adding feedback at " + location);
 			activeFeedback.Add(Instantiate (feedbackObject, new Vector2(scalePointX(location.x), scalePointY(location.y)), Quaternion.identity));
 		}
 	}

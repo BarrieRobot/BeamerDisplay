@@ -32,9 +32,10 @@ public class StateManager : MonoBehaviour {
 	}
 
 	void ReceiveStateChange() {
-		if (udpreceiver != null) {
+		if (udpreceiver != null && CurrentState.currentState == State.WAIT_FOR_NFC) {
 			int rfidid = udpreceiver.getLastReceivedRFID ();
 			if (rfidid != null && rfidid != -1) {
+				Debug.Log ("State manager switching to CHOOSING_CATEGORY");
 				CurrentState.currentState = State.CHOOSING_CATEGORY;
 			} else {
 				CurrentState.currentState = State.WAIT_FOR_NFC;

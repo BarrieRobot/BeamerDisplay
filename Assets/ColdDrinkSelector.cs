@@ -6,6 +6,8 @@ public class ColdDrinkSelector : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other) {
 		Debug.Log("Cold drink triggered");
+		CurrentState.currentState = State.SELECTING;
+		CurrentState.drink = Drink.COLD;
 	}
 
 	// Use this for initialization

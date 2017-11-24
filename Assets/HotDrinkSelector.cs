@@ -5,7 +5,9 @@ using UnityEngine;
 public class HotDrinkSelector : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other) {
-		Debug.Log("Cold drink triggered");
+		Debug.Log("Hot drink triggered");
+		CurrentState.currentState = State.SELECTING;
+		CurrentState.drink = Drink.HOT;
 	}
 
 	// Use this for initialization
