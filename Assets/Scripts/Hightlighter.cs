@@ -97,7 +97,7 @@ public class Hightlighter : MonoBehaviour {
 		LeftButton.SetActive (true);
 		RightButton.SetActive (true);
 		SelectButton.SetActive (true);
-		ChooseDrinkInfo.SetActive (false);
+		ChooseDrinkInfo.SetActive (true);
 	}
 
 	public void enableCategoryButtons() {

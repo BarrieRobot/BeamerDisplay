@@ -52,11 +52,11 @@ public class UDPReceive : MonoBehaviour {
 			lastReceivedRFIDID = -1;
 		}
 
-		tmptimer += Time.deltaTime;
+		/*tmptimer += Time.deltaTime;
 		if (tmptimer > 4) {
 			tmptimer = -9999;
 			lastReceivedRFIDID = 9999;
-		}
+		}*/
 	}
 
 	// init
