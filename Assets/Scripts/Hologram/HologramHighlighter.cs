@@ -21,6 +21,8 @@ public class HologramHighlighter : MonoBehaviour {
 		case State.WAIT_FOR_NFC:
 			scanTagPanel.SetActive (true);
 			chooseDrinkpanel.SetActive (false);
+			coffee.SetActive (false);
+			soda.SetActive (false);
 			break;
 		case State.CHOOSING_CATEGORY:
 			scanTagPanel.SetActive (false);
@@ -29,6 +31,7 @@ public class HologramHighlighter : MonoBehaviour {
 		case State.SELECTING:
 			scanTagPanel.SetActive (false);
 			chooseDrinkpanel.SetActive (false);
+			soda.SetActive (true);
 			break;
 		default:
 			break;
