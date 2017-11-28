@@ -52,11 +52,12 @@ public class UDPReceive : MonoBehaviour {
 			lastReceivedRFIDID = -1;
 		}
 
-		/*tmptimer += Time.deltaTime;
+		tmptimer += Time.deltaTime;
 		if (tmptimer > 4) {
 			tmptimer = -9999;
-			lastReceivedRFIDID = 9999;
-		}*/
+			lastReceivedUDPPacket = "{ \"rfid\": 9999}";
+			ParseData();
+		}
 	}
 
 	// init
@@ -106,6 +107,7 @@ public class UDPReceive : MonoBehaviour {
 				lastReceivedCursors = data ["cursors"].AsArray;
 			} else if (data ["rfid"] != null) {
 				lastReceivedRFIDID = data ["rfid"].AsInt;
+				EventManager.ExecuteNFCScanned (lastReceivedRFIDID);
 			} else {
 				Debug.LogError ("Invalid data received: " + data);
 			}

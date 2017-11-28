@@ -1,6 +1,6 @@
 ﻿using System;
 
-public enum Drink
+public enum DrinkType
 {
 	HOT,
 	COLD

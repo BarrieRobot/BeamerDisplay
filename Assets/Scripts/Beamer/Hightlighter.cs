@@ -15,6 +15,10 @@ public class Hightlighter : MonoBehaviour {
 	public GameObject ScanTagInfo;
 	public GameObject SelectTypeInfo;
 	public GameObject ChooseDrinkInfo;
+	public GameObject YouSelectedText;
+	public GameObject SelectedItemName;
+	public GameObject ScanToVerify;
+	public GameObject BeingPrepared;
 
 	public GameObject HotDrinkIndicatorActive;
 	public GameObject ColdDrinkIndicatorActive;
@@ -25,28 +29,40 @@ public class Hightlighter : MonoBehaviour {
 	private bool NFCHighlighenabled = false;
 	private GameObject spawnedHighlight;
 	// Use this for initialization
+
 	void Start () {
 		//spawnedHighlight= Instantiate (highlight);
 		//spawnedHighlight.transform.SetParent(canvas.transform, false);
 		//spawnedHighlight.transform.localPosition = NFCLocation;
-		ResetScene();
+		DisableAll();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		switch (CurrentState.currentState) {
 		case State.WAIT_FOR_NFC:
-			ResetScene ();
+			DisableAll ();
+			enableNFCHighlight ();
+			ScanTagInfo.SetActive (true);
+			activateSimpleHoleIndicators ();
 			break;
 		case State.CHOOSING_CATEGORY:
-			disableNFCHighlight ();
+			DisableAll ();
 			enableCategoryButtons ();
 			break;
 		case State.SELECTING:
-			disableNFCHighlight ();
-			disableCategorySelection ();
+			DisableAll ();
 			enableNavigation ();
 			activateCorrectIndicator ();
+			break;
+		case State.CONFIRMING:
+			DisableAll ();
+			enableNFCHighlight ();
+			enableConfirmNFC ();
+			break;
+		case State.PREPARING:
+			DisableAll ();
+			enablePreparingDrink ();
 			break;
 		default:
 			break;
@@ -54,37 +70,45 @@ public class Hightlighter : MonoBehaviour {
 	}
 
 	public void enableNFCHighlight() {
-		if (!NFCHighlighenabled) {
-			highlight.SetActive (true);
-			RightHoleIndication.SetActive (true);
-			Arrow.SetActive(true);
-			LeftHoleIndication.SetActive (true);
-			NFCHighlighenabled = true;
-		}
+		highlight.SetActive (true);
+		Arrow.SetActive(true);
+		NFCHighlighenabled = true;
 	}
 
-	public void disableNFCHighlight() {
-		if (NFCHighlighenabled) {
-			Arrow.SetActive(false);
-			highlight.SetActive(false);
-			ScanTagInfo.SetActive (false);
-			RightHoleIndication.SetActive (false);
-			LeftHoleIndication.SetActive (false);
-			NFCHighlighenabled = false;
-		}
+	public void enableConfirmNFC() {
+		YouSelectedText.SetActive (true);
+		SelectedItemName.SetActive (true);
+		ScanToVerify.SetActive (true);
 	}
+
+	public void enablePreparingDrink() {
+		BeingPrepared.SetActive (true);
+	}
+
+	/*public void disableNFCHighlight() {
+		Arrow.SetActive(false);
+		highlight.SetActive(false);
+		ScanTagInfo.SetActive (false);
+		RightHoleIndication.SetActive (false);
+		LeftHoleIndication.SetActive (false);
+	}*/
 
 	public void disableCategorySelection() {
 		SelectTypeInfo.SetActive (false);
 	}
 
+	public void activateSimpleHoleIndicators () {
+		RightHoleIndication.SetActive (true);
+		LeftHoleIndication.SetActive (true);
+	}
+
 	public void activateCorrectIndicator () {
-		if (CurrentState.drink.Equals (Drink.HOT)) {
+		if (CurrentState.drink.Equals (DrinkType.HOT)) {
 			ColdDrinkIndicatorActive.SetActive (false);
 			ColdDrinkIndicatorInactive.SetActive (true);
 			HotDrinkIndicatorActive.SetActive (true);
 			HotDrinkIndicatorInactive.SetActive (false);
-		} else if (CurrentState.drink.Equals (Drink.COLD)) {
+		} else if (CurrentState.drink.Equals (DrinkType.COLD)) {
 			ColdDrinkIndicatorActive.SetActive (true);
 			ColdDrinkIndicatorInactive.SetActive (false);
 			HotDrinkIndicatorActive.SetActive (false);
@@ -111,18 +135,24 @@ public class Hightlighter : MonoBehaviour {
 		SelectTypeInfo.SetActive (true);
 	}
 
-	public void ResetScene() {
+	public void DisableAll() {
 		ColdDrinkIndicatorActive.SetActive (false);
 		HotDrinkIndicatorActive.SetActive (false);
 		HotDrinkIndicatorInactive.SetActive (false);
 		ColdDrinkIndicatorInactive.SetActive (false);
 		SelectTypeInfo.SetActive (false);
-		RightHoleIndication.SetActive (true);
-		LeftHoleIndication.SetActive (true);
+		RightHoleIndication.SetActive (false);
+		LeftHoleIndication.SetActive (false);
 		LeftButton.SetActive (false);
 		RightButton.SetActive (false);
 		SelectButton.SetActive (false);
 		ChooseDrinkInfo.SetActive (false);
-		enableNFCHighlight ();
+		ScanTagInfo.SetActive (false);
+		Arrow.SetActive (false);
+		highlight.SetActive(false);
+		YouSelectedText.SetActive (false);
+		SelectedItemName.SetActive (false);
+		ScanToVerify.SetActive (false);
+		BeingPrepared.SetActive (false);
 	}
 }

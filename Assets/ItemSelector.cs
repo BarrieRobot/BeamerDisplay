@@ -1,12 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ItemSelector : MonoBehaviour {
 
 	public GameObject[] Sodas;
 	public GameObject[] Coffees;
 	public Vector3 moveVelocity;
+	public GameObject DrinkNameText;
+
+	public Hashtable itemnames; 
+	public Dictionary<string, string> MyDictionary;
 
 	public float LeftBound;
 	public float RightBound;
@@ -15,9 +20,11 @@ public class ItemSelector : MonoBehaviour {
 	private bool inAction = false;
 
 	private int current = 0;
+
 	// Use this for initialization
 	void Start () {
 		EventManager.OnClicked += Move;
+		EventManager.OnClickedSelect += Select;
 	}
 	
 	// Update is called once per frame
@@ -43,11 +50,11 @@ public class ItemSelector : MonoBehaviour {
 	void InstantiateNewItem (int delta) {
 		current += delta;
 		switch (CurrentState.drink) {
-		case Drink.HOT:
+		case DrinkType.HOT:
 			current = current % Coffees.Length;
 			active = Instantiate (Coffees [current], transform.parent);
 			break;
-		case Drink.COLD:
+		case DrinkType.COLD:
 			current = current % Sodas.Length;
 			active = Instantiate (Sodas [current], transform.parent);
 			break;
@@ -77,5 +84,10 @@ public class ItemSelector : MonoBehaviour {
 	void Select() {
 		active.GetComponent<Rigidbody> ().velocity = Vector3.Scale(Vector3.down, moveVelocity * Time.deltaTime);
 		CurrentState.currentState = State.CONFIRMING;
+		SetDrinkName ();
+	}
+
+	void SetDrinkName() {
+		DrinkNameText.GetComponent<Text> ().text = active.GetComponent<ChoosableItem> ().name;
 	}
 }
