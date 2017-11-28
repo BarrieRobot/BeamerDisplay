@@ -67,6 +67,7 @@ public class Hightlighter : MonoBehaviour {
 		if (NFCHighlighenabled) {
 			Arrow.SetActive(false);
 			highlight.SetActive(false);
+			ScanTagInfo.SetActive (false);
 			RightHoleIndication.SetActive (false);
 			LeftHoleIndication.SetActive (false);
 			NFCHighlighenabled = false;

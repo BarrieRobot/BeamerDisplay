@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ButtonRight : MonoBehaviour {
+public class ButtonSelect : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other) {
-		Debug.Log("Right button triggered");
-		EventManager.Execute (Direction.RIGHT);
+		Debug.Log("Left button triggered");
+		EventManager.ExecuteSelect ();
 	}
 }
