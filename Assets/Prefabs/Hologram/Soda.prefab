@@ -113,6 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Coca Cola
+  type: 1
 --- !u!114 &114386006122306872
 MonoBehaviour:
   m_ObjectHideFlags: 1

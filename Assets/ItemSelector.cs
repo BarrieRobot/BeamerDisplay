@@ -25,6 +25,7 @@ public class ItemSelector : MonoBehaviour {
 	void Start () {
 		EventManager.OnClicked += Move;
 		EventManager.OnClickedSelect += Select;
+		EventManager.OnDrinkTypeChange += ChangeType;
 	}
 	
 	// Update is called once per frame
@@ -66,11 +67,13 @@ public class ItemSelector : MonoBehaviour {
 	void onEnable () {
 		EventManager.OnClicked += Move;
 		EventManager.OnClickedSelect += Select;
+		EventManager.OnDrinkTypeChange += ChangeType;
 	}
 
 	void onDisable () {
 		EventManager.OnClicked -= Move;
 		EventManager.OnClickedSelect -= Select;
+		EventManager.OnDrinkTypeChange -= ChangeType;
 	}
 
 	void Move(Direction dir) {
@@ -85,6 +88,13 @@ public class ItemSelector : MonoBehaviour {
 		active.GetComponent<Rigidbody> ().velocity = Vector3.Scale(Vector3.down, moveVelocity * Time.deltaTime);
 		CurrentState.currentState = State.CONFIRMING;
 		SetDrinkName ();
+	}
+
+	void ChangeType() {
+		if (active.GetComponent<ChoosableItem> ().type != CurrentState.drink) {
+			Destroy (active);
+			InstantiateNewItem (0);
+		}
 	}
 
 	void SetDrinkName() {

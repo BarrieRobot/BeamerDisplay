@@ -7,4 +7,6 @@ public class ChoosableItem : MonoBehaviour {
 //	public ItemType type;
 	public string name;
 
+	public DrinkType type;
+
 }
