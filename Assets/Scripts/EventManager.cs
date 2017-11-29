@@ -9,6 +9,7 @@ public class EventManager : MonoBehaviour
 
 	public delegate void CollideActionSelect();
 	public static event CollideActionSelect OnClickedSelect;
+	public static event CollideActionSelect OnDrinkTypeChange;
 
 	public delegate void NFCScannedAction(int scanID);
 	public static event NFCScannedAction OnNFCScanned;
@@ -50,5 +51,10 @@ public class EventManager : MonoBehaviour
 	public static void ExecuteNFCScanned(int nfcid) {
 		if (OnNFCScanned != null)
 			OnNFCScanned (nfcid);
+	}
+
+	public static void ExecuteDrinkTypeChange() {
+		if (OnDrinkTypeChange != null)
+			OnDrinkTypeChange ();
 	}
 }

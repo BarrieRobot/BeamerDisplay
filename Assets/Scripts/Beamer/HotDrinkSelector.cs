@@ -8,6 +8,7 @@ public class HotDrinkSelector : MonoBehaviour {
 		Debug.Log("Hot drink triggered");
 		CurrentState.currentState = State.SELECTING;
 		CurrentState.drink = DrinkType.HOT;
+		EventManager.ExecuteDrinkTypeChange ();
 	}
 
 	//TODO remove debug code

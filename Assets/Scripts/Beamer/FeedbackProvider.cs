@@ -26,7 +26,7 @@ public class FeedbackProvider : MonoBehaviour {
 		List<Vector2> touches = touchInterpreter.getTouchPoints ();
 		foreach (Vector2 location in touches) {
 			//Debug.Log ("adding feedback at " + location);
-			activeFeedback.Add(Instantiate (feedbackObject, new Vector2(scalePointX(location.x), scalePointY(location.y)), Quaternion.identity));
+			activeFeedback.Add(Instantiate (feedbackObject, new Vector2(scalePointX(location.x), invert(scalePointY(location.y))), Quaternion.identity));
 		}
 	}
 
@@ -36,6 +36,10 @@ public class FeedbackProvider : MonoBehaviour {
 
 	private float scalePointY(float point) {
 		return Mathf.Lerp (sceneBoundMinY, sceneBoundMaxY, point);
+	}
+
+	private float invert(float point) {
+		return -point;
 	}
 
 	private void destroyFeedback() {

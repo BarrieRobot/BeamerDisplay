@@ -345,10 +345,10 @@ MonoBehaviour:
     type: 2}
   udpreceiver: {fileID: 760707503}
   touchInterpreter: {fileID: 760707505}
-  sceneBoundMinY: -4.5
-  sceneBoundMaxY: 4.5
-  sceneBoundMinX: -8.5
-  sceneBoundMaxX: 8.5
+  sceneBoundMinY: -220
+  sceneBoundMaxY: 220
+  sceneBoundMinX: -385
+  sceneBoundMaxX: 385
 --- !u!4 &238715182
 Transform:
   m_ObjectHideFlags: 0

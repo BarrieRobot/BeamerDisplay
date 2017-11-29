@@ -8,6 +8,7 @@ public class ColdDrinkSelector : MonoBehaviour {
 		Debug.Log("Cold drink triggered");
 		CurrentState.currentState = State.SELECTING;
 		CurrentState.drink = DrinkType.COLD;
+		EventManager.ExecuteDrinkTypeChange ();
 	}
 
 	// Use this for initialization
