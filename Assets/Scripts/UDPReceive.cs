@@ -99,6 +99,14 @@ public class UDPReceive : MonoBehaviour {
 		}
 	}
 
+	public void SendChoice(string name) {
+		Debug.Log ("sending");
+
+		byte[] bytes = System.Convert.FromBase64String (name);
+		client.Send(bytes, bytes.Length);
+		Debug.Log ("sent");
+	}
+
 	void ParseData() {
 		JSONNode data = JSON.Parse(lastReceivedUDPPacket);
 		if (data != null) {
