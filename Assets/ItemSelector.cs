@@ -32,6 +32,8 @@ public class ItemSelector : MonoBehaviour {
 	void Update () {
 		if (CurrentState.currentState == State.SELECTING) {
 			if (!inAction) {
+				if (active != null)
+					Destroy (active);
 				InstantiateNewItem (0);
 				inAction = true;
 			} else {
