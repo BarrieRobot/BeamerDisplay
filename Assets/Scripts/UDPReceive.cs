@@ -27,19 +27,7 @@ public class UDPReceive : MonoBehaviour {
 	private JSONArray lastReceivedCursors;
 
 	private float rfidTimer = 0;
-	// start from shell
-	private static void Main() {
-		UDPReceive receiveObj = new UDPReceive();
-		receiveObj.init();
 
-		string text="";
-		do {
-			text = Console.ReadLine();
-		}
-		while(!text.Equals("exit"));
-	}
-
-	// start from unity3d
 	public void Start() {
 		init();
 	}
@@ -60,22 +48,14 @@ public class UDPReceive : MonoBehaviour {
 		}
 	}
 
-	// init
 	private void init() {
-		// status
-		//print(" \t to 127.0.0.1 : "+port);
-		//print("Test-Sending to this Port: nc -u 127.0.0.1  "+port+"");
-
 		receiveThread = new Thread(
 			new ThreadStart(ReceiveData));
 		receiveThread.IsBackground = true;
 		receiveThread.Start();
-
 	}
 
-	// receive thread
 	private  void ReceiveData() {
-
 		client = new UdpClient(port);
 		while (running) {
 
@@ -95,16 +75,7 @@ public class UDPReceive : MonoBehaviour {
 				Debug.LogException (err);
 			}
 			ParseData ();
-			//Thread.Sleep (100);
 		}
-	}
-
-	public void SendChoice(string name) {
-		Debug.Log ("sending");
-
-		byte[] bytes = System.Convert.FromBase64String (name);
-		client.Send(bytes, bytes.Length);
-		Debug.Log ("sent");
 	}
 
 	void ParseData() {
@@ -139,8 +110,6 @@ public class UDPReceive : MonoBehaviour {
 		return lastReceivedRFIDID;
 	}
 
-	// getLatestUDPPacket
-	// cleans up the rest
 	public string getLatestUDPPacket() {
 		return lastReceivedUDPPacket;
 	}
