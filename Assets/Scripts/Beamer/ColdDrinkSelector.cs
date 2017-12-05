@@ -11,6 +11,14 @@ public class ColdDrinkSelector : MonoBehaviour {
 		EventManager.ExecuteDrinkTypeChange ();
 	}
 
+	//TODO remove debug code
+	void OnGUI()
+	{
+		if (GUI.Button (new Rect (Screen.width / 2 - 120, Screen.height-150, 80, 100), "ColdDrink")) {
+			OnTriggerEnter2D (null);
+		}
+	}
+
 	// Use this for initialization
 	void Start () {
 		

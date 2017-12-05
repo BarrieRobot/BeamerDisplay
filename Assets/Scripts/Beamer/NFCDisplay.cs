@@ -5,14 +5,21 @@ using UnityEngine.UI;
 
 public class NFCDisplay : MonoBehaviour {
 	Text text;
-	public UDPReceive udpreceive;
+	public NFCValidator nfcvalidator;
 	// Use this for initialization
 	void Start () {
 		text = gameObject.GetComponent<Text> ();
 	}
 
+	void OnGUI() {
+		if(GUI.Button(new Rect(Screen.width / 2 + 150, 5, 100, 30), "ScanNFC"))
+		{
+			EventManager.ExecuteNFCScanned (9999);
+		}
+	}
+
 	// Update is called once per frame
 	void Update () {
-		if (udpreceive.getLastReceivedRFID() != null)
-			text.text = "NFC ID=" + udpreceive.getLastReceivedRFID();
+		if (nfcvalidator.GetNFCID() != null)
+			text.text = "NFC ID=" + nfcvalidator.GetNFCID();
 	}}

@@ -14,7 +14,7 @@ public class HotDrinkSelector : MonoBehaviour {
 	//TODO remove debug code
 	void OnGUI()
 	{
-		if (GUI.Button (new Rect (Screen.width / 2 - 150, 60, 100, 30), "HotDrink")) {
+		if (GUI.Button (new Rect (Screen.width / 2, Screen.height-150, 80, 100), "HotDrink")) {
 			OnTriggerEnter2D (null);
 		}
 	}

@@ -47,6 +47,11 @@ public class ItemSelector : MonoBehaviour {
 			}
 		} else {
 			inAction = false;
+			if (CurrentState.currentState == State.WAIT_FOR_NFC ||
+			    CurrentState.currentState == State.CHOOSING_CATEGORY
+			    && active != null) {
+					Destroy (active);
+			}
 		}
 	}
 
@@ -93,7 +98,7 @@ public class ItemSelector : MonoBehaviour {
 	}
 
 	void ChangeType() {
-		if (active.GetComponent<ChoosableItem> ().type != CurrentState.drink) {
+		if (active != null && active.GetComponent<ChoosableItem> ().type != CurrentState.drink) {
 			Destroy (active);
 			InstantiateNewItem (0);
 		}
@@ -101,5 +106,9 @@ public class ItemSelector : MonoBehaviour {
 
 	void SetDrinkName() {
 		DrinkNameText.GetComponent<Text> ().text = active.GetComponent<ChoosableItem> ().name;
+	}
+
+	public ChoosableItem getCurrentItem() {
+		return active != null ? active.GetComponent<ChoosableItem> () : null;
 	}
 }

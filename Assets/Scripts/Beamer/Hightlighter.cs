@@ -20,6 +20,7 @@ public class Hightlighter : MonoBehaviour {
 	public GameObject ScanToVerify;
 	public GameObject BeingPrepared;
 	public GameObject CancelChoice;
+	public GameObject NewOrder;
 
 	public GameObject HotDrinkIndicatorActive;
 	public GameObject ColdDrinkIndicatorActive;
@@ -85,6 +86,7 @@ public class Hightlighter : MonoBehaviour {
 
 	public void enablePreparingDrink() {
 		BeingPrepared.SetActive (true);
+		NewOrder.SetActive (true);
 	}
 
 	/*public void disableNFCHighlight() {
@@ -157,5 +159,6 @@ public class Hightlighter : MonoBehaviour {
 		ScanToVerify.SetActive (false);
 		BeingPrepared.SetActive (false);
 		CancelChoice.SetActive (false);
+		NewOrder.SetActive (false);
 	}
 }

@@ -18,24 +18,7 @@ public class EventManager : MonoBehaviour
 	//TODO remove debug code
 	void OnGUI()
 	{
-		if(GUI.Button(new Rect(Screen.width / 2 - 150, 5, 100, 30), "Left"))
-		{
-			if (OnClicked != null) {
-				OnClicked (Direction.LEFT);
-			}
-		}
-		if(GUI.Button(new Rect(Screen.width / 2 + 50, 5, 100, 30), "Select"))
-		{
-			if (OnClickedSelect != null) {
-				OnClickedSelect ();
-			}
-		}
-		if(GUI.Button(new Rect(Screen.width / 2 + 150, 5, 100, 30), "ScanNFC"))
-		{
-			if (OnClickedSelect != null) {
-				ExecuteNFCScanned (9999);
-			}
-		}
+
 	}
 
 	public static void Execute (Direction dir) {
