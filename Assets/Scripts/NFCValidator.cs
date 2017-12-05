@@ -5,6 +5,9 @@ using UnityEngine;
 public class NFCValidator : MonoBehaviour {
 
 	private int currentActiveNFCID;
+	public UDPSend udpsender;
+	public ItemSelector itemSelector;
+	public DatabaseManager databaseManager;
 
 	// Use this for initialization
 	void Start () {
@@ -27,7 +30,8 @@ public class NFCValidator : MonoBehaviour {
 			break;
 		case State.CONFIRMING:
 			if (scannedID == currentActiveNFCID) {
-				Debug.Log ("CONFIRMED");
+				udpsender.SendString ("order placed: " + itemSelector.getCurrentItem().name);
+				databaseManager.insertOrder (scannedID, itemSelector.getCurrentItem().type, itemSelector.getCurrentItem().name);
 				CurrentState.currentState = State.PREPARING;
 			} else {
 				Debug.Log ("CONFIRM FAILED");
@@ -36,5 +40,9 @@ public class NFCValidator : MonoBehaviour {
 		default:
 			break;
 		}
+	}
+
+	public int GetNFCID () {
+		return currentActiveNFCID;
 	}
 }

@@ -43,7 +43,7 @@ public class UDPReceive : MonoBehaviour {
 		tmptimer += Time.deltaTime;
 		if (tmptimer > 4) {
 			tmptimer = -9999;
-			lastReceivedUDPPacket = "{ \"rfid\": 9999}";
+			lastReceivedUDPPacket = "{ \"rfid\": 9998}";
 			ParseData();
 		}
 	}

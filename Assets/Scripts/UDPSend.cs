@@ -30,7 +30,7 @@ public class UDPSend : MonoBehaviour
 	}
 
 	// OnGUI
-	void OnGUI()
+	/*void OnGUI()
 	{
 		Rect rectObj=new Rect(40,380,200,400);
 		GUIStyle style = new GUIStyle();
@@ -45,9 +45,9 @@ public class UDPSend : MonoBehaviour
 		strMessage=GUI.TextField(new Rect(40,420,140,20),strMessage);
 		if (GUI.Button(new Rect(190,420,40,20),"send"))
 		{
-			sendString(strMessage+"\n");
+			SendString(strMessage+"\n");
 		}
-	}
+	}*/
 
 	public void init()
 	{
@@ -59,14 +59,14 @@ public class UDPSend : MonoBehaviour
 		client = new UdpClient();
 	}
 
-	private void sendString(string message)
+	public void SendString(string message)
 	{
 		try
 		{
 			if (message != "")
 			{
 				byte[] data = Encoding.UTF8.GetBytes(message);
-				Debug.Log("sending " + IP + port);
+				Debug.Log("sending: " + message + " on " +  IP + ":" + port);
 				// Den message zum Remote-Client senden.
 				client.Send(data, data.Length, remoteEndPoint);
 			}
