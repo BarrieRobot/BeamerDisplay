@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ButtonRight : MonoBehaviour {
+public class CancelButton : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other) {
-		Debug.Log("Right button triggered");
-		EventManager.Execute (Direction.RIGHT);
+		CurrentState.currentState = State.SELECTING;
 	}
 }
