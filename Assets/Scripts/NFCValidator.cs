@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NFCValidator : MonoBehaviour {
+public class NFCValidator : MonoBehaviour
+{
 
 	private int currentActiveNFCID;
 	public UDPSend udpsender;
@@ -10,19 +11,23 @@ public class NFCValidator : MonoBehaviour {
 	public DatabaseManager databaseManager;
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+	{
 		EventManager.OnNFCScanned += OnScanned;
 	}
 
-	void OnEnable() {
+	void OnEnable ()
+	{
 		EventManager.OnNFCScanned += OnScanned;
 	}
 
-	void OnDisable() {
+	void OnDisable ()
+	{
 		EventManager.OnNFCScanned -= OnScanned;
 	}
 
-	void OnScanned(int scannedID) {
+	void OnScanned (int scannedID)
+	{
 		switch (CurrentState.currentState) {
 		case State.WAIT_FOR_NFC:
 			currentActiveNFCID = scannedID;
@@ -30,8 +35,8 @@ public class NFCValidator : MonoBehaviour {
 			break;
 		case State.CONFIRMING:
 			if (scannedID == currentActiveNFCID) {
-				udpsender.SendString ("order placed: " + itemSelector.getCurrentItem().name);
-				databaseManager.insertOrder (scannedID, itemSelector.getCurrentItem().type, itemSelector.getCurrentItem().name);
+				udpsender.SendString ("order placed: " + itemSelector.getCurrentItem ().name);
+				databaseManager.insertOrder (scannedID, itemSelector.getCurrentItem ().drink, itemSelector.getCurrentItem ().name);
 				CurrentState.currentState = State.PREPARING;
 			} else {
 				Debug.Log ("CONFIRM FAILED");
@@ -42,7 +47,8 @@ public class NFCValidator : MonoBehaviour {
 		}
 	}
 
-	public int GetNFCID () {
+	public int GetNFCID ()
+	{
 		return currentActiveNFCID;
 	}
 }
