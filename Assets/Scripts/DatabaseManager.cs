@@ -39,9 +39,11 @@ public class DatabaseManager : MonoBehaviour {
 
 	}
 
-	public void insertOrder(int nfcID, DrinkType drink, string name = "") {
-		Firebase myOrders = orders.Child (""+nfcID);
-		myOrders.Push ("{ \"drink\": \"" + drink + "\", \"name\": \"" + name + "\" }", true); //true makes it create child objects
+	public void insertOrder (int nfcID, Drink drink, string name = "")
+	{
+		Firebase myOrders = orders.Child ("" + nfcID);
+		myOrders.Push ("{ \"drink\": \"" + (int)drink + "\", \"name\": \"" + name + "\", \"time\": \"" + System.DateTime.Now + "\" }", true); //true makes it create child objects
+
 	}
 
 	static void GetOKHandler(Firebase sender, DataSnapshot snapshot)

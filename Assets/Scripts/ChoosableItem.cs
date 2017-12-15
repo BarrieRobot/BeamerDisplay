@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChoosableItem : MonoBehaviour {
+public class ChoosableItem : MonoBehaviour
+{
 	
-//	public ItemType type;
+	//	public ItemType type;
 	public string name;
 
 	public DrinkType type;
 
+	public Drink drink;
 }
