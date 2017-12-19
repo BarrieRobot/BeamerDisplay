@@ -9,14 +9,16 @@ public class FeedbackProvider : MonoBehaviour
 	public UDPReceive udpreceiver;
 	public TouchInterpreter touchInterpreter;
 
-	public float sceneBoundMinY = -4.5f;
-	public float sceneBoundMaxY = 4.5f;
+	public float sceneBoundMinY;
+	public float sceneBoundMaxY;
 
-	public float sceneBoundMinX = -8.5f;
-	public float sceneBoundMaxX = 8.5f;
+	public float sceneBoundMinX;
+	public float sceneBoundMaxX;
 
 	private List<GameObject> activeFeedback;
 	private GameObject Display;
+
+	public bool debug = false;
 	// Use this for initialization
 	void Start ()
 	{
@@ -28,13 +30,24 @@ public class FeedbackProvider : MonoBehaviour
 	void Update ()
 	{
 		destroyFeedback ();
+		if (debug) {
+			GameObject fb1 = Instantiate (feedbackObject, new Vector2 (scalePointX (1), invert (scalePointY (1))), Quaternion.identity);
+			GameObject fb2 = Instantiate (feedbackObject, new Vector2 (scalePointX (1), invert (scalePointY (0))), Quaternion.identity);
+			GameObject fb3 = Instantiate (feedbackObject, new Vector2 (scalePointX (0), invert (scalePointY (0))), Quaternion.identity);
+			GameObject fb4 = Instantiate (feedbackObject, new Vector2 (scalePointX (0), invert (scalePointY (1))), Quaternion.identity);
+			activeFeedback.Add (fb1);
+			activeFeedback.Add (fb2);
+			activeFeedback.Add (fb3);
+			activeFeedback.Add (fb4);
+		}
+
 		List<Vector2> touches = touchInterpreter.getTouchPoints ();
 		foreach (Vector2 location in touches) {
 			//Debug.Log ("adding feedback at " + location);
 			GameObject fb = Instantiate (feedbackObject, new Vector2 (scalePointX (location.x), invert (scalePointY (location.y))), Quaternion.identity);
-			fb.transform.SetParent (Display.transform);
+			//fb.transform.SetParent (Display.transform);
 			activeFeedback.Add (fb);
-			fb.transform.position = new Vector2 (scalePointX (location.x), invert (scalePointY (location.y)));
+			//fb.transform.position = new Vector2 (scalePointX (location.x), invert (scalePointY (location.y)));
 		}
 	}
 
