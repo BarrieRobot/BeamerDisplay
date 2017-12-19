@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114027729334545496}
   - component: {fileID: 54493485348688940}
   m_Layer: 0
-  m_Name: CocaCola
+  m_Name: ColaZero2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -248,7 +248,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 2a5970e28304bf047810b5d21e22c68c, type: 2}
+  - {fileID: 2100000, guid: cbcf4e8437f69440ab069466166bcf3f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

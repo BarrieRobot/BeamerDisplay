@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114027729334545496}
   - component: {fileID: 54493485348688940}
   m_Layer: 0
-  m_Name: CocaCola
+  m_Name: Fanta
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -180,7 +180,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 94a909f109cedfa4f85fc339a71e1b47, type: 2}
+  - {fileID: 2100000, guid: 49b41031050eb41d58a2b321d3ddfa4d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -214,7 +214,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 8a700717d336f0b4e99214059d9a37d1, type: 2}
+  - {fileID: 2100000, guid: 2f23487c89bba4f3081894d5a8f4c279, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -248,7 +248,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 2a5970e28304bf047810b5d21e22c68c, type: 2}
+  - {fileID: 2100000, guid: 2b1fde31ac27b48c28120690baf608bc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -282,7 +282,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: bfeff86bff4fe4d40ab46e48836f1db7, type: 2}
+  - {fileID: 2100000, guid: 3126088d9a4454489af28fae203d7e6d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
