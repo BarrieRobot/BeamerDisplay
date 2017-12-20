@@ -12,6 +12,7 @@ public class NFCValidator : MonoBehaviour
 	public GameObject ResetProgressDisplay;
 	private int currentActiveNFCID;
 	public float inactivityTimer = 0;
+	private float ProgressbarFractionOfResetTime = 4;
 
 
 	// Use this for initialization
@@ -70,12 +71,11 @@ public class NFCValidator : MonoBehaviour
 		if (CurrentState.currentState != State.WAIT_FOR_NFC) {
 			inactivityTimer += Time.deltaTime;
 		}
-		if (inactivityTimer > NFCTimeoutSeconds / 2) {
+		if (inactivityTimer > NFCTimeoutSeconds - NFCTimeoutSeconds / ProgressbarFractionOfResetTime) {
 			ResetProgressDisplay.SetActive (true);
-			ResetProgressDisplay.GetComponent <Image> ().fillAmount = (inactivityTimer - NFCTimeoutSeconds / 2) / (NFCTimeoutSeconds / 2);
+			ResetProgressDisplay.GetComponent <Image> ().fillAmount = (inactivityTimer - NFCTimeoutSeconds * ((ProgressbarFractionOfResetTime - 1) / ProgressbarFractionOfResetTime)) / (NFCTimeoutSeconds / ProgressbarFractionOfResetTime);
 		}
 		if (inactivityTimer > NFCTimeoutSeconds) {
-			Debug.Log ("reset nfc");
 			currentActiveNFCID = 0;
 			inactivityTimer = 0;
 			ResetProgressDisplay.GetComponent <Image> ().fillAmount = 0;
