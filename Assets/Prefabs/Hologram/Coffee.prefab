@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 54646094338329126}
   - component: {fileID: 114776283293091262}
   - component: {fileID: 114065066278510298}
+  - component: {fileID: 114203615560355260}
   m_Layer: 0
   m_Name: Coffee
   m_TagString: Untagged
@@ -113,6 +114,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Zwarte Koffie
+  type: 0
+  drink: 0
+--- !u!114 &114203615560355260
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1541741336388942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1244223b5c2bb44bea48502c8e6e32f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  magnitude: 20
+  speed: 1
 --- !u!114 &114776283293091262
 MonoBehaviour:
   m_ObjectHideFlags: 1

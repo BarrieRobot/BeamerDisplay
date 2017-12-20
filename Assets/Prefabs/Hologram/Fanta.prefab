@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 114022971300027028}
   - component: {fileID: 114027729334545496}
   - component: {fileID: 54493485348688940}
+  - component: {fileID: 114433236683552108}
   m_Layer: 0
   m_Name: Fanta
   m_TagString: Untagged
@@ -374,3 +375,16 @@ MonoBehaviour:
   name: Fanta
   type: 1
   drink: 2
+--- !u!114 &114433236683552108
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1351646584693916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1244223b5c2bb44bea48502c8e6e32f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  magnitude: 20
+  speed: 1

@@ -254,7 +254,7 @@ GameObject:
   - component: {fileID: 72307346}
   - component: {fileID: 72307348}
   - component: {fileID: 72307347}
-  m_Layer: 4
+  m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -268,7 +268,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 72307345}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0000076293945, y: -0.0000019073486, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1690168248}
@@ -276,8 +276,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0000076293945, y: -0.0000019073486}
-  m_SizeDelta: {x: 200, y: 30}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 176.96, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &72307347
 MonoBehaviour:
@@ -321,7 +321,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4671209857840738, guid: 615e7bedba2794f0f8bb0db93fb94be7, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -230
+      value: -210
       objectReference: {fileID: 0}
     - target: {fileID: 4671209857840738, guid: 615e7bedba2794f0f8bb0db93fb94be7, type: 2}
       propertyPath: m_LocalPosition.y
@@ -856,6 +856,10 @@ Prefab:
     - target: {fileID: 4483951423165280, guid: c72bbd16fabf94879be58e01e58ae060, type: 2}
       propertyPath: m_LocalScale.y
       value: 96.9005
+      objectReference: {fileID: 0}
+    - target: {fileID: 1475511347670850, guid: c72bbd16fabf94879be58e01e58ae060, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c72bbd16fabf94879be58e01e58ae060, type: 2}
@@ -1760,7 +1764,8 @@ MonoBehaviour:
   - {fileID: 1351646584693916, guid: f237c0b22bd7a4301bcea40a37c84d34, type: 2}
   - {fileID: 1351646584693916, guid: 4b9bedabc0d014df687eb1ec09dd2977, type: 2}
   Coffees:
-  - {fileID: 1541741336388942, guid: 31442693d92864cf98a087dff5805d09, type: 2}
+  - {fileID: 1415267607728958, guid: 56d50b6a3b48a4afabb9e1a2815f2602, type: 2}
+  - {fileID: 1957668704811984, guid: 142470f13b6c04d9d9afd99675290609, type: 2}
   moveVelocity: {x: 20000, y: 0, z: 0}
   DrinkNameText: {fileID: 1054310104}
   LeftBound: -400
@@ -1801,7 +1806,7 @@ MonoBehaviour:
   udpsender: {fileID: 760707506}
   itemSelector: {fileID: 1099973875}
   databaseManager: {fileID: 500781418}
-  NFCTimeoutSeconds: 10
+  NFCTimeoutSeconds: 20
   ResetProgressDisplay: {fileID: 1690168247}
   inactivityTimer: 0
 --- !u!4 &1254940235
@@ -2063,6 +2068,10 @@ Prefab:
       propertyPath: m_LocalScale.y
       value: 96.9005
       objectReference: {fileID: 0}
+    - target: {fileID: 1487726697599338, guid: ffad60e0cb5184570817815cdeb658c6, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ffad60e0cb5184570817815cdeb658c6, type: 2}
   m_IsPrefabParent: 0
@@ -2082,7 +2091,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1406850011
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2235,7 +2244,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4364233977869572, guid: 464da406554a348949ae64fbc7ac068f, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 230
+      value: 210
       objectReference: {fileID: 0}
     - target: {fileID: 4364233977869572, guid: 464da406554a348949ae64fbc7ac068f, type: 2}
       propertyPath: m_LocalPosition.y
@@ -2298,7 +2307,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1498009083
 Transform:
   m_ObjectHideFlags: 0
@@ -2306,7 +2315,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1498009082}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -293, y: 101, z: -90}
+  m_LocalPosition: {x: -190, y: 101, z: -90}
   m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_Children: []
   m_Father: {fileID: 2134800135}
@@ -2419,7 +2428,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1504272335
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2629,7 +2638,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1690168247}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3, y: -176, z: 0}
+  m_LocalPosition: {x: -14.519997, y: -176, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 72307346}
@@ -2638,8 +2647,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -3, y: -176}
-  m_SizeDelta: {x: 200, y: 30}
+  m_AnchoredPosition: {x: -14.52, y: -176}
+  m_SizeDelta: {x: 176.96, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1690168249
 MonoBehaviour:
@@ -3010,7 +3019,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1917723453
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3018,7 +3027,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1917723452}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 154.81, z: -90}
+  m_LocalPosition: {x: 0, y: 145, z: -90}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2134800135}
@@ -3026,7 +3035,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 154.81}
+  m_AnchoredPosition: {x: 0, y: 145}
   m_SizeDelta: {x: 10, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1917723454
@@ -3050,7 +3059,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 485b1013acab548d58d468a3dc7f85e6, type: 3}
-    m_FontSize: 59
+    m_FontSize: 55
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
