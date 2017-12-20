@@ -35,12 +35,12 @@ public class NFCValidator : MonoBehaviour
 
 	void ResetNFCInactivity ()
 	{
+		ResetProgressDisplay.GetComponent <Image> ().fillAmount = 0;
 		inactivityTimer = 0;
 	}
 
 	void OnScanned (int scannedID)
 	{
-		Debug.Log ("Onscanned NFCValidator");
 		switch (CurrentState.currentState) {
 		case State.WAIT_FOR_NFC:
 			currentActiveNFCID = scannedID;
