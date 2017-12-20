@@ -63,12 +63,16 @@ public class ItemSelector : MonoBehaviour
 		current += delta;
 		switch (CurrentState.drink) {
 		case DrinkType.HOT:
-			current = Mathf.Abs (current % Coffees.Length);
+			current = current % Coffees.Length;
+			if (current < 0)
+				current = Coffees.Length - 1;
 			active = Instantiate (Coffees [current], transform.parent);
 			active.transform.localPosition = new Vector3 (xPos, active.transform.localPosition.y, active.transform.localPosition.z);
 			break;
 		case DrinkType.COLD:
-			current = Mathf.Abs (current % Sodas.Length);
+			current = current % Sodas.Length;
+			if (current < 0)
+				current = Sodas.Length - 1;
 			active = Instantiate (Sodas [current], transform.parent);
 			active.transform.localPosition = new Vector3 (xPos, active.transform.localPosition.y, active.transform.localPosition.z);
 			break;
