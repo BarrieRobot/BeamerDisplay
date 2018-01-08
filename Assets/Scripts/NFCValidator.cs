@@ -49,7 +49,7 @@ public class NFCValidator : MonoBehaviour
 			break;
 		case State.CONFIRMING:
 			if (scannedID == currentActiveNFCID) {
-				udpsender.SendString ("order placed: " + itemSelector.getCurrentItem ().name);
+				udpsender.SendString ("order: " + itemSelector.getCurrentItem ().drink);
 				databaseManager.insertOrder (scannedID, itemSelector.getCurrentItem ().drink, itemSelector.getCurrentItem ().name);
 				CurrentState.currentState = State.PREPARING;
 			} else {

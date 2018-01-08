@@ -27,6 +27,7 @@ public class ChoosableItem : MonoBehaviour
 			//gameObject.GetComponent<Rigidbody> ().position = new Vector3 (newX, gameObject.transform.localPosition.y, gameObject.transform.localPosition.z);
 
 		} else if (gravitating) {
+			// Item has gravitated within bounds [-1, 1]
 			gameObject.GetComponent<Rigidbody> ().velocity = Vector3.zero;
 			gameObject.transform.localPosition = new Vector3 (0, gameObject.transform.localPosition.y, gameObject.transform.localPosition.z);
 			gravitating = false;
