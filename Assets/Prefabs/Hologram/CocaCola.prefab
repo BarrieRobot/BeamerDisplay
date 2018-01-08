@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114027729334545496}
   - component: {fileID: 54493485348688940}
   - component: {fileID: 114931137446745948}
+  - component: {fileID: 114168176478123546}
   m_Layer: 0
   m_Name: CocaCola
   m_TagString: Untagged
@@ -375,6 +376,22 @@ MonoBehaviour:
   name: Coca Cola
   type: 1
   drink: 1
+--- !u!114 &114168176478123546
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1351646584693916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f0477f6d58ca4c96b25ec2ff7365eb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wiggleSize: 19.41
+  wiggleSpeed: 10
+  x: 1
+  y: 1
+  z: 1
 --- !u!114 &114931137446745948
 MonoBehaviour:
   m_ObjectHideFlags: 1
