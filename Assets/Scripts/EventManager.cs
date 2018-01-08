@@ -21,6 +21,11 @@ public class EventManager : MonoBehaviour
 
 	public static event AnyAction OnAnything;
 
+	public delegate void StartMinigameAction ();
+
+	public static event StartMinigameAction OnStartMinigame;
+
+
 	//TODO remove debug code
 	void OnGUI ()
 	{
@@ -59,5 +64,11 @@ public class EventManager : MonoBehaviour
 	{
 		if (OnAnything != null)
 			OnAnything ();
+	}
+
+	public static void ExecuteStartMinigame ()
+	{
+		if (OnStartMinigame != null)
+			OnStartMinigame ();
 	}
 }

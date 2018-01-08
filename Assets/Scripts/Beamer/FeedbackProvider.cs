@@ -6,6 +6,10 @@ public class FeedbackProvider : MonoBehaviour
 {
 
 	public GameObject feedbackObject;
+
+	public GameObject MinigameBasket;
+	public float MinigameTouchHeight;
+
 	public UDPReceive udpreceiver;
 	public TouchInterpreter touchInterpreter;
 
@@ -40,14 +44,25 @@ public class FeedbackProvider : MonoBehaviour
 			activeFeedback.Add (fb3);
 			activeFeedback.Add (fb4);
 		}
-
 		List<Vector2> touches = touchInterpreter.getTouchPoints ();
-		foreach (Vector2 location in touches) {
-			//Debug.Log ("adding feedback at " + location);
-			GameObject fb = Instantiate (feedbackObject, new Vector2 (scalePointX (location.x), invert (scalePointY (location.y))), Quaternion.identity);
-			//fb.transform.SetParent (Display.transform);
-			activeFeedback.Add (fb);
-			//fb.transform.position = new Vector2 (scalePointX (location.x), invert (scalePointY (location.y)));
+		if (CurrentState.currentState.Equals (State.PREPARING)) {
+			foreach (Vector2 location in touches) {
+				if (location.y < MinigameTouchHeight) {
+					GameObject fb = Instantiate (MinigameBasket, new Vector2 (scalePointX (location.x), invert (scalePointY (location.y))), Quaternion.identity);
+					activeFeedback.Add (fb);
+				} else {
+					GameObject fb = Instantiate (feedbackObject, new Vector2 (scalePointX (location.x), invert (scalePointY (location.y))), Quaternion.identity);
+					activeFeedback.Add (fb);
+				}
+			}
+		} else {
+			foreach (Vector2 location in touches) {
+				//Debug.Log ("adding feedback at " + location);
+				GameObject fb = Instantiate (feedbackObject, new Vector2 (scalePointX (location.x), invert (scalePointY (location.y))), Quaternion.identity);
+				//fb.transform.SetParent (Display.transform);
+				activeFeedback.Add (fb);
+				//fb.transform.position = new Vector2 (scalePointX (location.x), invert (scalePointY (location.y)));
+			}
 		}
 	}
 
