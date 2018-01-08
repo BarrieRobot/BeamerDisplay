@@ -5,14 +5,11 @@ using UnityEngine.UI;
 
 public class ItemSelector : MonoBehaviour
 {
-
+	public UDPSend udpsender;
 	public GameObject[] Sodas;
 	public GameObject[] Coffees;
 	public Vector3 moveVelocity;
 	public GameObject DrinkNameText;
-
-	public Hashtable itemnames;
-	public Dictionary<string, string> MyDictionary;
 
 	public float LeftBound;
 	public float RightBound;
@@ -43,9 +40,13 @@ public class ItemSelector : MonoBehaviour
 				if (active.transform.localPosition.x < LeftBound) {
 					Destroy (active);
 					InstantiateNewItem (-1, RightBound);
+					if (udpsender != null)
+						udpsender.requestStock (current);
 				} else if (active.transform.localPosition.x > RightBound) {
 					Destroy (active);
 					InstantiateNewItem (1, LeftBound);
+					if (udpsender != null)
+						udpsender.requestStock (current);
 				}
 			}
 		} else {

@@ -15,18 +15,20 @@ public class UDPSend : MonoBehaviour
 	private static int localPort;
 
 	// prefs
-	private string IP;  // define in init
-	public int port;  // define in init
+	private string IP;
+	// define in init
+	public int port;
+	// define in init
 
 	// "connection" things
 	IPEndPoint remoteEndPoint;
 	UdpClient client;
 
-	string strMessage="";
+	string strMessage = "";
 
-	public void Start()
+	public void Start ()
 	{
-		init();
+		init ();
 	}
 
 	// OnGUI
@@ -49,31 +51,32 @@ public class UDPSend : MonoBehaviour
 		}
 	}*/
 
-	public void init()
+	public void init ()
 	{
 		// define
-		IP="127.0.0.1";
-		port=5006;
+		IP = "127.0.0.1";
+		port = 5006;
 
-		remoteEndPoint = new IPEndPoint(IPAddress.Parse(IP), port);
-		client = new UdpClient();
+		remoteEndPoint = new IPEndPoint (IPAddress.Parse (IP), port);
+		client = new UdpClient ();
 	}
 
-	public void SendString(string message)
+	public void requestStock (int column)
 	{
-		try
-		{
-			if (message != "")
-			{
-				byte[] data = Encoding.UTF8.GetBytes(message);
-				Debug.Log("sending: " + message + " on " +  IP + ":" + port);
+		SendString ("stock:" + column);
+	}
+
+	public void SendString (string message)
+	{
+		try {
+			if (message != "") {
+				byte[] data = Encoding.UTF8.GetBytes (message);
+				Debug.Log ("sending: " + message + " on " + IP + ":" + port);
 				// Den message zum Remote-Client senden.
-				client.Send(data, data.Length, remoteEndPoint);
+				client.Send (data, data.Length, remoteEndPoint);
 			}
-		}
-		catch (Exception err)
-		{
-			print(err.ToString());
+		} catch (Exception err) {
+			print (err.ToString ());
 		}
 	}
 }

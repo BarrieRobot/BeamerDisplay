@@ -85,11 +85,6 @@ public class UDPReceive : MonoBehaviour
 		}
 	}
 
-	JSONArray frame;
-	public Byte[] framebytes = new Byte[30];
-	public ExampleClass ex;
-	List<byte> bytelist = new List<byte> ();
-
 	void ParseData ()
 	{
 		JSONNode data = JSON.Parse (lastReceivedUDPPacket);
@@ -100,20 +95,23 @@ public class UDPReceive : MonoBehaviour
 			} else if (data ["rfid"] != null) {
 				lastReceivedRFIDID = data ["rfid"].AsInt;
 				EventManager.ExecuteNFCScanned (lastReceivedRFIDID);
-			} else if (data ["frame"] != null) {
-				Debug.Log (data ["frame"].AsArray);
-				frame = data ["frame"].AsArray;
-				int i = 0;
-				foreach (JSONNode n in frame) {
-					byte b = (byte)n.AsInt;
-					bytelist.Add ((byte)n.AsInt);
-					Debug.Log (b);
-					Debug.Log ("b");
-					//	Debug.Log (framebytes [i]);
-					i += 1;
+			} else if (data ["stock"] != null) {
+				Debug.Log ("stock nr: " + data ["stock"].AsInt);
+				int column = data ["stock"].AsInt;
+				int stock = data ["value"].AsInt;
+				switch (column) {
+				case 0:
+					Stock.colaStock = stock;
+					break;
+				case 1: 
+					Stock.fantaStock = stock;
+					break;
+				case 2:
+					Stock.minutemaidStock = stock;
+					break;
+				default:
+					break;
 				}
-				Debug.Log (bytelist.Count);
-				ex.UpdateImage (bytelist);
 			} else {
 				Debug.LogError ("Invalid data received: " + data);
 			}
