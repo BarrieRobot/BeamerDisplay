@@ -180,9 +180,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'What would you
+  m_Text: 'Wat wilt u
 
-    like to drink?'
+    graag drinken?'
 --- !u!222 &10917994
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -532,11 +532,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 702b1cae4524a41cf8aeb341d1d51cde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  feedbackObject: {fileID: 1039910735898910, guid: 9a245bbc023f34caebcc1320d1b93f37,
+  feedbackObject: {fileID: 1961697501598324, guid: 5b3da1af715ea4fbf942d4c7bfd790b1,
     type: 2}
   MinigameBasket: {fileID: 1586382889364040, guid: 9a75ab82381d54f9dbc426327be549d3,
     type: 2}
-  MinigameTouchHeight: 0.8
+  MinigameTouchHeight: 0.7
   udpreceiver: {fileID: 760707503}
   touchInterpreter: {fileID: 760707505}
   sceneBoundMinY: -220
@@ -624,7 +624,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Scan your tag to verify
+  m_Text: Scan uw tag om te verifieren
 --- !u!222 &301359184
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -806,7 +806,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Choose your drink
+  m_Text: Kies uw drankje
 --- !u!222 &443116379
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1243,7 +1243,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 761458537}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 207, y: -107, z: 0}
+  m_LocalPosition: {x: -10, y: -131, z: 0}
   m_LocalScale: {x: 60, y: 60, z: 125.71875}
   m_Children: []
   m_Father: {fileID: 2134800135}
@@ -1728,7 +1728,7 @@ RectTransform:
   m_GameObject: {fileID: 1054310104}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 60, z: 0}
-  m_LocalScale: {x: 2.2475219, y: 2.2475226, z: 2.2475226}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2134800135}
   m_RootOrder: 17
@@ -1759,11 +1759,11 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 485b1013acab548d58d468a3dc7f85e6, type: 3}
-    m_FontSize: 31
+    m_FontSize: 55
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
+    m_MinSize: 5
+    m_MaxSize: 55
     m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -2226,7 +2226,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1406850010}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.100006, y: 18.93, z: -90}
+  m_LocalPosition: {x: 4.100006, y: 30, z: -90}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2134800135}
@@ -2234,7 +2234,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 4.1, y: 18.93}
+  m_AnchoredPosition: {x: 4.1, y: 30}
   m_SizeDelta: {x: 400, y: 128}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1406850012
@@ -2269,7 +2269,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "Your order is \nbeing prepared"
+  m_Text: 'Uw bestelling
+
+    wordt bereid'
 --- !u!222 &1406850013
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2434,7 +2436,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1498009083
 Transform:
   m_ObjectHideFlags: 0
@@ -2606,11 +2608,11 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 0.8
-  m_Text: 'Welcome!
+  m_Text: 'Welcom!
 
-    Scan your tag
+    Scan uw tag
 
-    to order drinks'
+    om drinken te bestellen'
 --- !u!222 &1504272337
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2700,15 +2702,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4470004260988830, guid: e0efce89885084f699b1577b59018066, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 44.9
+      value: 33.2
       objectReference: {fileID: 0}
     - target: {fileID: 4470004260988830, guid: e0efce89885084f699b1577b59018066, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -52.8
+      value: -41.4
       objectReference: {fileID: 0}
     - target: {fileID: 4470004260988830, guid: e0efce89885084f699b1577b59018066, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0.7
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 4470004260988830, guid: e0efce89885084f699b1577b59018066, type: 2}
       propertyPath: m_LocalRotation.x
@@ -2732,11 +2734,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4470004260988830, guid: e0efce89885084f699b1577b59018066, type: 2}
       propertyPath: m_LocalScale.x
-      value: 77.436584
+      value: 66.75922
       objectReference: {fileID: 0}
     - target: {fileID: 4470004260988830, guid: e0efce89885084f699b1577b59018066, type: 2}
       propertyPath: m_LocalScale.y
-      value: 86.20383
+      value: 70.84788
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e0efce89885084f699b1577b59018066, type: 2}
@@ -2769,6 +2771,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 72307346}
+  - {fileID: 2070242773}
   m_Father: {fileID: 2134800135}
   m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3147,7 +3150,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1917723453
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3198,7 +3201,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'You selected:'
+  m_Text: 'U wilt:'
 --- !u!222 &1917723455
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3230,7 +3233,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1925274682}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 211, y: -96, z: -90}
+  m_LocalPosition: {x: 211, y: -80, z: -90}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2134800135}
@@ -3351,6 +3354,80 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2070242772
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 2070242773}
+  - component: {fileID: 2070242775}
+  - component: {fileID: 2070242774}
+  m_Layer: 5
+  m_Name: text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2070242773
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2070242772}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -7.299999, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1690168248}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.00000043539, y: -7.3}
+  m_SizeDelta: {x: 176.96, y: 94.53}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2070242774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2070242772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 485b1013acab548d58d468a3dc7f85e6, type: 3}
+    m_FontSize: 17
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 1
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "NFC tag wordt gereset \n"
+--- !u!222 &2070242775
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2070242772}
 --- !u!1 &2117801154
 GameObject:
   m_ObjectHideFlags: 0
