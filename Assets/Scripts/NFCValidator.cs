@@ -36,6 +36,7 @@ public class NFCValidator : MonoBehaviour
 
 	void ResetNFCInactivity ()
 	{
+		ResetProgressDisplay.SetActive (false);
 		ResetProgressDisplay.GetComponent <Image> ().fillAmount = 0;
 		inactivityTimer = 0;
 	}
@@ -68,7 +69,7 @@ public class NFCValidator : MonoBehaviour
 
 	void Update ()
 	{
-		if (CurrentState.currentState != State.WAIT_FOR_NFC) {
+		if (CurrentState.currentState != State.WAIT_FOR_NFC && CurrentState.currentState != State.PREPARING) {
 			inactivityTimer += Time.deltaTime;
 		}
 		if (inactivityTimer > NFCTimeoutSeconds - NFCTimeoutSeconds / ProgressbarFractionOfResetTime) {
