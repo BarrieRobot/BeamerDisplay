@@ -16,9 +16,9 @@ public class Spawner : MonoBehaviour
 	float timer = 0;
 
 
-	float spawnY = 200;
-	float spawnXmin = -100;
-	float spawnXmax = 100;
+	float spawnY = 250;
+	float spawnXmin = -200;
+	float spawnXmax = 200;
 	// Use this for initialization
 	void Start ()
 	{
@@ -50,9 +50,9 @@ public class Spawner : MonoBehaviour
 	void Spawn ()
 	{
 		if (CurrentState.drink.Equals (DrinkType.COLD)) {
-			Instantiate (SugarCube, new Vector3 (Random.Range (spawnXmin, spawnXmax), spawnY, 0), Quaternion.identity);
+			Instantiate (SugarCube, new Vector3 (Random.Range (spawnXmin, spawnXmax), spawnY, 0), Quaternion.Euler (new Vector3 (0, 0, Random.Range (0, 360))));
 		} else {
-			Instantiate (CoffeeBean, new Vector3 (Random.Range (spawnXmin, spawnXmax), spawnY, 0), Quaternion.identity);
+			Instantiate (CoffeeBean, new Vector3 (Random.Range (spawnXmin, spawnXmax), spawnY, 0), Quaternion.Euler (new Vector3 (0, 0, Random.Range (0, 360))));
 		}
 	}
 }

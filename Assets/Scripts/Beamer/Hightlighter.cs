@@ -22,6 +22,7 @@ public class Hightlighter : MonoBehaviour
 	public GameObject BeingPrepared;
 	public GameObject CancelChoice;
 	public GameObject NewOrder;
+	public GameObject MinigameScore;
 
 	public GameObject HotDrinkIndicatorActive;
 	public GameObject ColdDrinkIndicatorActive;
@@ -93,6 +94,7 @@ public class Hightlighter : MonoBehaviour
 	{
 		BeingPrepared.SetActive (true);
 		NewOrder.SetActive (true);
+		MinigameScore.SetActive (true);
 	}
 
 	/*public void disableNFCHighlight() {
@@ -172,5 +174,6 @@ public class Hightlighter : MonoBehaviour
 		BeingPrepared.SetActive (false);
 		CancelChoice.SetActive (false);
 		NewOrder.SetActive (false);
+		MinigameScore.SetActive (false);
 	}
 }

@@ -17,5 +17,12 @@ public class Basket : MonoBehaviour
 		
 	}
 
+	void OnTriggerEnter2D (Collider2D other)
+	{
+		if (other.gameObject.name.Equals ("bean(Clone)")) {
+			GameObject.Find ("MiniGame").GetComponent <Minigame> ().IncrementScore ();
+			Destroy (other.gameObject);
+		}
+	}
 
 }

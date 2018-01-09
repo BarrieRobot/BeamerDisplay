@@ -47,7 +47,7 @@ public class FeedbackProvider : MonoBehaviour
 		List<Vector2> touches = touchInterpreter.getTouchPoints ();
 		if (CurrentState.currentState.Equals (State.PREPARING)) {
 			foreach (Vector2 location in touches) {
-				if (location.y < MinigameTouchHeight) {
+				if (location.y > MinigameTouchHeight) {
 					GameObject fb = Instantiate (MinigameBasket, new Vector2 (scalePointX (location.x), invert (scalePointY (location.y))), Quaternion.identity);
 					activeFeedback.Add (fb);
 				} else {

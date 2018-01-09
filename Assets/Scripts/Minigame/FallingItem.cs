@@ -18,11 +18,4 @@ public class FallingItem : MonoBehaviour
 			Destroy (gameObject);
 		}
 	}
-
-	void OnTriggerEnter2D (Collider2D other)
-	{
-		if (other.gameObject.name.Equals ("Basket (Clone)")) {
-			GameObject.Find ("MiniGame").GetComponent <Minigame> ().IncrementScore ();
-		}
-	}
 }

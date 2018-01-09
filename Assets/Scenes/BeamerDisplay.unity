@@ -534,8 +534,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   feedbackObject: {fileID: 1039910735898910, guid: 9a245bbc023f34caebcc1320d1b93f37,
     type: 2}
-  MinigameBasket: {fileID: 0}
-  MinigameTouchHeight: 0
+  MinigameBasket: {fileID: 1586382889364040, guid: 9a75ab82381d54f9dbc426327be549d3,
+    type: 2}
+  MinigameTouchHeight: 0.8
   udpreceiver: {fileID: 760707503}
   touchInterpreter: {fileID: 760707505}
   sceneBoundMinY: -220
@@ -1180,8 +1181,6 @@ MonoBehaviour:
   port: 5005
   lastReceivedUDPPacket: 
   lastReceivedRFIDID: -1
-  framebytes: 000000000000000000000000000000000000000000000000000000000000
-  ex: {fileID: 0}
 --- !u!4 &760707504
 Transform:
   m_ObjectHideFlags: 0
@@ -1207,17 +1206,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   receiver: {fileID: 760707503}
-  configPath: /home/jonathan/git/BarrieBeamerDisplay/Assets/Resources/test.txt
-  leftButtonBoundsMin: {x: 0, y: 0}
-  leftButtonBoundsMax: {x: 0, y: 0}
-  rightButtonBoundsMin: {x: 0, y: 0}
-  rightButtonBoundsMax: {x: 0, y: 0}
-  selectButtonBoundsMin: {x: 0, y: 0}
-  selectButtonBoundsMax: {x: 0, y: 0}
-  HotSelectionMin: {x: 0, y: 0}
-  HotSelectionMax: {x: 0, y: 0}
-  ColdSelectionMin: {x: 0, y: 0}
-  ColdSelectionMax: {x: 0, y: 0}
 --- !u!114 &760707506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1434,7 +1422,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1835,6 +1823,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c745a2099e8fa45bcad53c44f11e9dc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  udpsender: {fileID: 0}
   Sodas:
   - {fileID: 1678917564957864, guid: 798e115615f704a9ab82d95f8121485b, type: 2}
   - {fileID: 1863617918984274, guid: 61b86db365aaa491cb46d46c7b65c9c1, type: 2}
@@ -2052,8 +2041,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4ec9c8478e514f0ba0abc07fb23b0ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CoffeeBean: {fileID: 1130579873388702, guid: 99b006d270b554a0f940d3abaccf52cf, type: 2}
-  SugarCube: {fileID: 1130579873388702, guid: 99b006d270b554a0f940d3abaccf52cf, type: 2}
+  CoffeeBean: {fileID: 1475825815161088, guid: 34189c8ae21784758ad499752607f3a1, type: 2}
+  SugarCube: {fileID: 1475825815161088, guid: 34189c8ae21784758ad499752607f3a1, type: 2}
   SpawnDelayMin: 1
   SpawnDelayMax: 2
 --- !u!114 &1368328667
@@ -2870,6 +2859,7 @@ MonoBehaviour:
   BeingPrepared: {fileID: 1406850010}
   CancelChoice: {fileID: 1498009082}
   NewOrder: {fileID: 1925274682}
+  MinigameScore: {fileID: 851507069}
   HotDrinkIndicatorActive: {fileID: 406963004}
   ColdDrinkIndicatorActive: {fileID: 1443187905}
   HotDrinkIndicatorInactive: {fileID: 192894128}
