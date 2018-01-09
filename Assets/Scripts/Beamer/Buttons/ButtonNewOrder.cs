@@ -8,13 +8,13 @@ public class ButtonNewOrder : MonoBehaviour
 	void OnGUI ()
 	{
 		if (GUI.Button (new Rect (Screen.width - 150, Screen.height / 2, 100, 30), "NEW")) {
-			OnTriggerEnter2D (null);
+			CurrentState.currentState = State.CHOOSING_CATEGORY;
 		}
 	}
 
 	void OnTriggerEnter2D (Collider2D other)
 	{
-		if (!other.name.Contains ("bean")) {
+		if (other.name.Contains ("Feedback")) {
 			CurrentState.currentState = State.CHOOSING_CATEGORY;
 		}
 	}

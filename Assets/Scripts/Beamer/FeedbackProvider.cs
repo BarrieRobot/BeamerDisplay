@@ -46,14 +46,21 @@ public class FeedbackProvider : MonoBehaviour
 		}
 		List<Vector2> touches = touchInterpreter.getTouchPoints ();
 		if (CurrentState.currentState.Equals (State.PREPARING)) {
+			List<Vector2> basketLocations = new List <Vector2> ();
 			foreach (Vector2 location in touches) {
 				if (location.y > MinigameTouchHeight) {
-					GameObject fb = Instantiate (MinigameBasket, new Vector2 (scalePointX (location.x), invert (scalePointY (location.y))), Quaternion.identity);
-					activeFeedback.Add (fb);
+					basketLocations.Add (location);
+					//GameObject fb = Instantiate (MinigameBasket, new Vector2 (scalePointX (location.x), invert (scalePointY (location.y))), Quaternion.identity);
+					//activeFeedback.Add (fb);
 				} else {
 					GameObject fb = Instantiate (feedbackObject, new Vector2 (scalePointX (location.x), invert (scalePointY (location.y))), Quaternion.identity);
 					activeFeedback.Add (fb);
 				}
+			}
+			if (basketLocations.Count > 0) {
+				Vector2 basketLoc = getAverage (basketLocations);
+				GameObject basket = Instantiate (MinigameBasket, new Vector2 (scalePointX (basketLoc.x), invert (scalePointY (basketLoc.y))), Quaternion.identity);
+				activeFeedback.Add (basket);
 			}
 		} else {
 			foreach (Vector2 location in touches) {
@@ -87,6 +94,18 @@ public class FeedbackProvider : MonoBehaviour
 			if (fb != null)
 				Destroy (fb);
 		}
+	}
+
+	private Vector2 getAverage (List<Vector2> Points)
+	{
+		float sumX = 0;
+		float sumY = 0;
+		foreach (Vector2 p in Points) {
+			sumX += p.x;
+			sumY += p.y;
+		}
+		Vector2 result = new Vector2 (sumX / Points.Count, sumY / Points.Count);
+		return result;
 	}
 }
 

@@ -15,7 +15,8 @@ public class ButtonSelect : MonoBehaviour
 
 	void OnTriggerEnter2D (Collider2D other)
 	{
-		Debug.Log ("select button triggered");
-		EventManager.ExecuteSelect ();
+		if (other.name.Contains ("Feedback")) {
+			EventManager.ExecuteSelect ();
+		}
 	}
 }
