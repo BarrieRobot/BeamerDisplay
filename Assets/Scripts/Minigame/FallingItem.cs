@@ -14,7 +14,7 @@ public class FallingItem : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		if (gameObject.transform.localPosition.y < -220) {
+		if (gameObject.transform.localPosition.y < -250) {
 			Destroy (gameObject);
 		}
 	}

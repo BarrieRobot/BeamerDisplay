@@ -25,6 +25,9 @@ public class EventManager : MonoBehaviour
 
 	public static event StartMinigameAction OnStartMinigame;
 
+	public delegate void CategoryChosenAction ();
+
+	public static event CategoryChosenAction OnCategoryChosen;
 
 	//TODO remove debug code
 	void OnGUI ()
@@ -70,5 +73,11 @@ public class EventManager : MonoBehaviour
 	{
 		if (OnStartMinigame != null)
 			OnStartMinigame ();
+	}
+
+	public static void ExecuteCategoryChosen ()
+	{
+		if (OnCategoryChosen != null)
+			OnCategoryChosen ();
 	}
 }

@@ -9,7 +9,7 @@ public class ButtonSelect : MonoBehaviour
 	void OnGUI ()
 	{
 		if (GUI.Button (new Rect (Screen.width / 2 - 50, Screen.height / 2 - 30, 100, 30), "Select")) {
-			OnTriggerEnter2D (null);
+			EventManager.ExecuteSelect ();
 		}
 	}
 

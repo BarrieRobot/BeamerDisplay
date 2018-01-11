@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212261426935138884}
   - component: {fileID: 60300755378709342}
   - component: {fileID: 50106030286726004}
+  - component: {fileID: 114554717633075994}
   m_Layer: 0
   m_Name: bean
   m_TagString: Untagged
@@ -100,6 +101,17 @@ PolygonCollider2D:
       - {x: 43.5, y: -28.5}
       - {x: 58.5, y: -10.5}
       - {x: 66.5, y: 5.5}
+--- !u!114 &114554717633075994
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1475825815161088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b294af4a6ae6340d590dac75880e4687, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212261426935138884
 SpriteRenderer:
   m_ObjectHideFlags: 1
