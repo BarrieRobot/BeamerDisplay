@@ -10,6 +10,7 @@ public class ItemSelector : MonoBehaviour
 	public GameObject[] Coffees;
 	public Vector3 moveVelocity;
 	public GameObject DrinkNameText;
+	public float startDelay;
 
 	public float LeftBound;
 	public float RightBound;
@@ -25,6 +26,7 @@ public class ItemSelector : MonoBehaviour
 		EventManager.OnClicked += Move;
 		EventManager.OnClickedSelect += Select;
 		EventManager.OnDrinkTypeChange += ChangeType;
+		EventManager.OnNFCScanned += FallDown;
 	}
 	
 	// Update is called once per frame
@@ -34,9 +36,11 @@ public class ItemSelector : MonoBehaviour
 			if (!inAction) {
 				if (active != null)
 					Destroy (active);
-				InstantiateNewItem (0, 0);
+				
+				StartCoroutine ("StartDelayed");
 				inAction = true;
 			} else {
+				if (active != null)
 				if (active.transform.localPosition.x < LeftBound) {
 					Destroy (active);
 					InstantiateNewItem (-1, RightBound);
@@ -58,6 +62,15 @@ public class ItemSelector : MonoBehaviour
 			}
 		}
 	}
+
+	IEnumerator StartDelayed ()
+	{
+		InstantiateNewItem (0, 0);
+		active.SetActive (false);
+		yield return new WaitForSeconds (startDelay);
+		active.SetActive (true);
+	}
+
 
 	void InstantiateNewItem (int delta, float xPos)
 	{
@@ -87,6 +100,7 @@ public class ItemSelector : MonoBehaviour
 		EventManager.OnClicked += Move;
 		EventManager.OnClickedSelect += Select;
 		EventManager.OnDrinkTypeChange += ChangeType;
+		EventManager.OnNFCScanned += FallDown;
 	}
 
 	void onDisable ()
@@ -94,22 +108,26 @@ public class ItemSelector : MonoBehaviour
 		EventManager.OnClicked -= Move;
 		EventManager.OnClickedSelect -= Select;
 		EventManager.OnDrinkTypeChange -= ChangeType;
+		EventManager.OnNFCScanned -= FallDown;
 	}
 
 	void Move (Direction dir)
 	{
 		active.GetComponent <ChoosableItem> ().stopGravity ();
 		active.GetComponent<ChoosableItem> ().moveOut (dir);
-		if (dir.Equals (Direction.LEFT)) {
-			//active.GetComponent<Rigidbody> ().velocity = Vector3.Scale (Vector3.left, moveVelocity);
-		} else { //right
-			//active.GetComponent<Rigidbody> ().velocity = Vector3.Scale (Vector3.right, moveVelocity);
+	}
+
+	public void FallDown (int i)
+	{
+		if (CurrentState.currentState == State.PREPARING) {
+			active.GetComponent<Rigidbody> ().useGravity = true;//velocity = Vector3.Scale (Vector3.down, moveVelocity * Time.deltaTime);
+			active.GetComponent<Levitate> ().enabled = false;
 		}
 	}
 
 	void Select ()
 	{
-		active.GetComponent<Rigidbody> ().velocity = Vector3.Scale (Vector3.down, moveVelocity * Time.deltaTime);
+		//active.GetComponent<Rigidbody> ().AddForce (0, -50, 0);
 		CurrentState.currentState = State.CONFIRMING;
 		SetDrinkName ();
 	}
