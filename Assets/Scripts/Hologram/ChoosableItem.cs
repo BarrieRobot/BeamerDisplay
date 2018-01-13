@@ -17,9 +17,17 @@ public class ChoosableItem : MonoBehaviour
 	private bool gravitating = true;
 	private bool moveout = false;
 	private Direction movedir;
+	private bool falling = false;
 
 	void Update ()
 	{
+		if (gameObject.transform.localPosition.y < -500)
+			Destroy (gameObject);
+		if (falling && gameObject.transform.localPosition.y < 1) {
+			GetComponent<Rigidbody> ().useGravity = false;//velocity = Vector3.Scale (Vector3.down, moveVelocity * Time.deltaTime);
+			GetComponent<Levitate> ().enabled = true;
+			falling = false;
+		}
 		if (gravitating && (gameObject.transform.localPosition.x > 1 || gameObject.transform.localPosition.x < -1)) {
 			float pctFromMid = gameObject.transform.localPosition.x / SceneGlobals.sceneBound;
 			float newVel = pctFromMid * targetVel;
@@ -37,6 +45,11 @@ public class ChoosableItem : MonoBehaviour
 			float newVel = Mathf.Lerp (Mathf.Abs (gameObject.GetComponent<Rigidbody> ().velocity.x), targetVel, Time.deltaTime * moveOutInterpSpeed);
 			gameObject.GetComponent<Rigidbody> ().velocity = Vector3.Scale (movedir == Direction.RIGHT ? Vector3.right : Vector3.left, new Vector3 (newVel, 0, 0));
 		}
+	}
+
+	public void Fall ()
+	{
+		falling = true;
 	}
 
 	public void stopGravity ()

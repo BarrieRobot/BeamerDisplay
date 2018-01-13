@@ -135,8 +135,18 @@ public class ItemSelector : MonoBehaviour
 	void ChangeType ()
 	{
 		if (active != null && active.GetComponent<ChoosableItem> ().type != CurrentState.drink) {
-			Destroy (active);
-			InstantiateNewItem (0, 0);
+			active.GetComponent<Rigidbody> ().useGravity = true;//velocity = Vector3.Scale (Vector3.down, moveVelocity * Time.deltaTime);
+			active.GetComponent<Levitate> ().enabled = false;
+			if (CurrentState.drink == DrinkType.COLD) {
+				active = Instantiate (Sodas [current], transform.parent);
+			} else {
+				active = Instantiate (Coffees [current], transform.parent);
+			}
+			active.transform.localPosition = new Vector3 (0, 500, active.transform.localPosition.z);
+			active.GetComponent<Rigidbody> ().useGravity = true;//velocity = Vector3.Scale (Vector3.down, moveVelocity * Time.deltaTime);
+			active.GetComponent<Levitate> ().enabled = false;
+			active.GetComponent<ChoosableItem> ().Fall ();//Destroy (active);
+			//InstantiateNewItem (0, 0);
 		}
 	}
 
