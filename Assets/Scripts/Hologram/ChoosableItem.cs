@@ -47,9 +47,13 @@ public class ChoosableItem : MonoBehaviour
 		}
 	}
 
-	public void Fall ()
+	public void Fall (bool enable)
 	{
-		falling = true;
+		if (enable) {
+			falling = true;
+		} else {
+			falling = false;
+		}
 	}
 
 	public void stopGravity ()

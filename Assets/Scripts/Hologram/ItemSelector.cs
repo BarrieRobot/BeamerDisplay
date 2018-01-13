@@ -27,6 +27,7 @@ public class ItemSelector : MonoBehaviour
 		EventManager.OnClickedSelect += Select;
 		EventManager.OnDrinkTypeChange += ChangeType;
 		EventManager.OnNFCScanned += FallDown;
+		EventManager.OnShowOver += EnableActive;
 	}
 	
 	// Update is called once per frame
@@ -37,7 +38,8 @@ public class ItemSelector : MonoBehaviour
 				if (active != null)
 					Destroy (active);
 				
-				StartCoroutine ("StartDelayed");
+				InstantiateNewItem (0, 0);
+				active.SetActive (false);
 				inAction = true;
 			} else {
 				if (active != null)
@@ -62,15 +64,6 @@ public class ItemSelector : MonoBehaviour
 			}
 		}
 	}
-
-	IEnumerator StartDelayed ()
-	{
-		InstantiateNewItem (0, 0);
-		active.SetActive (false);
-		yield return new WaitForSeconds (startDelay);
-		active.SetActive (true);
-	}
-
 
 	void InstantiateNewItem (int delta, float xPos)
 	{
@@ -101,6 +94,7 @@ public class ItemSelector : MonoBehaviour
 		EventManager.OnClickedSelect += Select;
 		EventManager.OnDrinkTypeChange += ChangeType;
 		EventManager.OnNFCScanned += FallDown;
+		EventManager.OnShowOver += EnableActive;
 	}
 
 	void onDisable ()
@@ -109,6 +103,7 @@ public class ItemSelector : MonoBehaviour
 		EventManager.OnClickedSelect -= Select;
 		EventManager.OnDrinkTypeChange -= ChangeType;
 		EventManager.OnNFCScanned -= FallDown;
+		EventManager.OnShowOver -= EnableActive;
 	}
 
 	void Move (Direction dir)
@@ -132,20 +127,26 @@ public class ItemSelector : MonoBehaviour
 		SetDrinkName ();
 	}
 
+	void EnableActive () {
+		active.SetActive (true);
+	}
+
 	void ChangeType ()
 	{
 		if (active != null && active.GetComponent<ChoosableItem> ().type != CurrentState.drink) {
-			active.GetComponent<Rigidbody> ().useGravity = true;//velocity = Vector3.Scale (Vector3.down, moveVelocity * Time.deltaTime);
+			current = 0;
 			active.GetComponent<Levitate> ().enabled = false;
+			active.GetComponent<Rigidbody> ().useGravity = true;//velocity = Vector3.Scale (Vector3.down, moveVelocity * Time.deltaTime);
+			active.GetComponent<ChoosableItem> ().Fall(false);
 			if (CurrentState.drink == DrinkType.COLD) {
 				active = Instantiate (Sodas [current], transform.parent);
 			} else {
 				active = Instantiate (Coffees [current], transform.parent);
 			}
 			active.transform.localPosition = new Vector3 (0, 500, active.transform.localPosition.z);
-			active.GetComponent<Rigidbody> ().useGravity = true;//velocity = Vector3.Scale (Vector3.down, moveVelocity * Time.deltaTime);
 			active.GetComponent<Levitate> ().enabled = false;
-			active.GetComponent<ChoosableItem> ().Fall ();//Destroy (active);
+			active.GetComponent<Rigidbody> ().useGravity = true;//velocity = Vector3.Scale (Vector3.down, moveVelocity * Time.deltaTime);
+			active.GetComponent<ChoosableItem> ().Fall (true);//Destroy (active);
 			//InstantiateNewItem (0, 0);
 		}
 	}

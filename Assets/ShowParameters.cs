@@ -24,7 +24,7 @@ public class ShowParameters : MonoBehaviour
 
 	void Start ()
 	{
-		EventManager.OnCategoryChosen += ExitShow;
+		EventManager.OnDrinkTypeChange += ExitShow;
 		//i = interval * 
 		steps = (int)(exitDuration / interval);
 		xradreduce = xradius * (1f / steps) * 0.5f;
@@ -33,7 +33,7 @@ public class ShowParameters : MonoBehaviour
 
 	void OnEnable ()
 	{
-		EventManager.OnCategoryChosen += ExitShow;
+		EventManager.OnDrinkTypeChange += ExitShow;
 		xradius = 300;
 		zradius = 250;
 		speed = 0.53f;
@@ -41,13 +41,15 @@ public class ShowParameters : MonoBehaviour
 
 	void OnDisable ()
 	{
-		EventManager.OnCategoryChosen -= ExitShow;
+		EventManager.OnDrinkTypeChange -= ExitShow;
 	}
 
 	public void ExitShow ()
 	{
-		speed = speed * 1.5f;
-		StartCoroutine ("speedUp");	
+		if (isActiveAndEnabled) {
+			speed = speed * 1.5f;
+			StartCoroutine ("speedUp");	
+		}
 	}
 
 	IEnumerator speedUp ()
@@ -58,6 +60,7 @@ public class ShowParameters : MonoBehaviour
 			zradius -= (zradreduce);
 			yield return new WaitForSeconds (interval);
 		}
+		EventManager.ExecuteShowOver ();
 		gameObject.SetActive (false);
 	}
 }

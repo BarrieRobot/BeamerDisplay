@@ -29,6 +29,10 @@ public class EventManager : MonoBehaviour
 
 	public static event CategoryChosenAction OnCategoryChosen;
 
+	public delegate void ShowOverAction ();
+
+	public static event ShowOverAction OnShowOver;
+
 	//TODO remove debug code
 	void OnGUI ()
 	{
@@ -79,5 +83,12 @@ public class EventManager : MonoBehaviour
 	{
 		if (OnCategoryChosen != null)
 			OnCategoryChosen ();
+	}
+
+
+	public static void ExecuteShowOver ()
+	{
+		if (OnShowOver != null)
+			OnShowOver ();
 	}
 }
