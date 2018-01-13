@@ -462,7 +462,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Fanta
   type: 1
-  drink: 2
+  drink: 6
 --- !u!114 &114862309343955974
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -6,16 +6,23 @@ using UnityEngine;
 //using UnityEditor;
 using SimpleFirebaseUnity;
 
+//using NUnit.Framework;
+using System.Configuration;
+using SimpleJSON;
+
 public class DatabaseManager : MonoBehaviour
 {
 	Firebase firebase;
 	Firebase orders;
+	Firebase barrie;
+	public static List<Order> lastReceivedOrders;
+	public static Dictionary<int, float> prices;
 
 	void Start ()
 	{
 		firebase = Firebase.CreateNew ("iona-4d244.firebaseio.com", "dUS0OWpxo7cGor2C81N2ffPbvliYQIc69jLDTO5m");
 		// Init callbacks
-		firebase.OnGetSuccess += GetOKHandler;
+		/*firebase.OnGetSuccess += GetOKHandler;
 		firebase.OnGetFailed += GetFailHandler;
 		firebase.OnSetSuccess += SetOKHandler;
 		firebase.OnSetFailed += SetFailHandler;
@@ -25,9 +32,11 @@ public class DatabaseManager : MonoBehaviour
 		firebase.OnPushFailed += PushFailHandler;
 		firebase.OnDeleteSuccess += DelOKHandler;
 		firebase.OnDeleteFailed += DelFailHandler;
-
-		Firebase barrie = firebase.Child ("Barrie", true);
+*/
+		barrie = firebase.Child ("Barrie", true);
 		orders = firebase.Child ("shared", true).Child ("orders", true);
+
+		lastReceivedOrders = new List<Order> ();
 
 		// Make observer on "last update" time stamp
 		FirebaseObserver observer = new FirebaseObserver (barrie, 1f);
@@ -35,6 +44,8 @@ public class DatabaseManager : MonoBehaviour
 			DoDebug ("[OBSERVER] Last updated changed to: " + snapshot.Value<long> ());
 		};
 		observer.Start ();
+		//	getExistingOrders (9999);
+		getPrices ();
 	}
 	
 	// Update is called once per frame
@@ -47,77 +58,53 @@ public class DatabaseManager : MonoBehaviour
 	{
 		Firebase myOrders = orders.Child ("" + nfcID);
 		myOrders.Push ("{ \"drink\": \"" + (int)drink + "\", \"name\": \"" + name + "\", \"time\": \"" + System.DateTime.Now.ToString ("dd/MM/yyyy HH:mm:ss") + "\" }", true); //true makes it create child objects
+	}
 
+	public List<Order> getExistingOrders (int nfcID)
+	{
+		Debug.Log ("getorder");
+		Firebase myOrders = orders.Child ("" + nfcID);
+		myOrders.OnGetSuccess += GetOKHandler;
+		myOrders.GetValue ();
+		return null;
+	}
+
+	public void getPrices ()
+	{
+		Firebase options = barrie.Child ("options");
+		options.OnGetSuccess += GetPricesHandler;
+		options.GetValue ();
+	}
+
+	static void GetPricesHandler (Firebase sender, DataSnapshot snapshot)
+	{
+		prices = new Dictionary<int, float> ();
+		JSONArray items = JSON.Parse (snapshot.RawJson).AsArray;
+		Dictionary<string, object> dict = snapshot.Value<Dictionary<string, object>> ();
+		int i = 0;
+		foreach (JSONObject item in items) {
+			Debug.Log (i + " = " + item ["price"].AsFloat);
+			prices.Add (i, item ["price"].AsFloat);
+			i++;
+		}
 	}
 
 	static void GetOKHandler (Firebase sender, DataSnapshot snapshot)
 	{
 		DoDebug ("[OK] Get from key: <" + sender.FullKey + ">");
 		DoDebug ("[OK] Raw Json: " + snapshot.RawJson);
-
 		Dictionary<string, object> dict = snapshot.Value<Dictionary<string, object>> ();
 		List<string> keys = snapshot.Keys;
+		lastReceivedOrders.Clear ();
 
-		if (keys != null)
+		if (keys != null) {
 			foreach (string key in keys) {
-				DoDebug (key + " = " + dict [key].ToString ());
+				Dictionary<string, object> order = (Dictionary<string, object>)dict [key];
+				DoDebug (key + " = " + order ["name"].ToString () + " on " + order ["time"].ToString ());
+				//DateTime myDate = DateTime.ParseExact (order ["time"].ToString (), "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+				lastReceivedOrders.Add (new Order (order ["time"].ToString (), order ["name"].ToString ()));
 			}
-	}
-
-	static void GetFailHandler (Firebase sender, FirebaseError err)
-	{
-		DoDebug ("[ERR] Get from key: <" + sender.FullKey + ">,  " + err.Message + " (" + (int)err.Status + ")");
-	}
-
-	static void SetOKHandler (Firebase sender, DataSnapshot snapshot)
-	{
-		DoDebug ("[OK] Set from key: <" + sender.FullKey + ">");
-	}
-
-	static void SetFailHandler (Firebase sender, FirebaseError err)
-	{
-		DoDebug ("[ERR] Set from key: <" + sender.FullKey + ">, " + err.Message + " (" + (int)err.Status + ")");
-	}
-
-	static void UpdateOKHandler (Firebase sender, DataSnapshot snapshot)
-	{
-		DoDebug ("[OK] Update from key: <" + sender.FullKey + ">");
-	}
-
-	static void UpdateFailHandler (Firebase sender, FirebaseError err)
-	{
-		DoDebug ("[ERR] Update from key: <" + sender.FullKey + ">, " + err.Message + " (" + (int)err.Status + ")");
-	}
-
-	static void DelOKHandler (Firebase sender, DataSnapshot snapshot)
-	{
-		DoDebug ("[OK] Del from key: <" + sender.FullKey + ">");
-	}
-
-	static void DelFailHandler (Firebase sender, FirebaseError err)
-	{
-		DoDebug ("[ERR] Del from key: <" + sender.FullKey + ">, " + err.Message + " (" + (int)err.Status + ")");
-	}
-
-	static void PushOKHandler (Firebase sender, DataSnapshot snapshot)
-	{
-		DoDebug ("[OK] Push from key: <" + sender.FullKey + ">");
-	}
-
-	static void PushFailHandler (Firebase sender, FirebaseError err)
-	{
-		DoDebug ("[ERR] Push from key: <" + sender.FullKey + ">, " + err.Message + " (" + (int)err.Status + ")");
-	}
-
-	static void GetRulesOKHandler (Firebase sender, DataSnapshot snapshot)
-	{
-		DoDebug ("[OK] GetRules");
-		DoDebug ("[OK] Raw Json: " + snapshot.RawJson);
-	}
-
-	static void GetRulesFailHandler (Firebase sender, FirebaseError err)
-	{
-		DoDebug ("[ERR] GetRules,  " + err.Message + " (" + (int)err.Status + ")");
+		}
 	}
 
 	static void GetTimeStamp (Firebase sender, DataSnapshot snapshot)

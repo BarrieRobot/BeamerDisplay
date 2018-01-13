@@ -479,7 +479,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Coca Cola
   type: 1
-  drink: 1
+  drink: 5
 --- !u!114 &114781351161379442
 MonoBehaviour:
   m_ObjectHideFlags: 1

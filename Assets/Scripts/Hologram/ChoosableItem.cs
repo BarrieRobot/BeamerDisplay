@@ -19,6 +19,13 @@ public class ChoosableItem : MonoBehaviour
 	private Direction movedir;
 	private bool falling = false;
 
+	private float price = 0;
+
+	void Start ()
+	{
+		price = DatabaseManager.prices [(int)drink];
+	}
+
 	void Update ()
 	{
 		if (gameObject.transform.localPosition.y < -500)
@@ -65,5 +72,10 @@ public class ChoosableItem : MonoBehaviour
 	{
 		movedir = dir;
 		moveout = true;
+	}
+
+	public float getPrice ()
+	{
+		return price;
 	}
 }

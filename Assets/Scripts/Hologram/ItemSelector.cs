@@ -11,6 +11,7 @@ public class ItemSelector : MonoBehaviour
 	public Vector3 moveVelocity;
 	public GameObject DrinkNameText;
 	public float startDelay;
+	public Text namePriceDisplay;
 
 	public float LeftBound;
 	public float RightBound;
@@ -42,17 +43,18 @@ public class ItemSelector : MonoBehaviour
 				active.SetActive (false);
 				inAction = true;
 			} else {
-				if (active != null)
-				if (active.transform.localPosition.x < LeftBound) {
-					Destroy (active);
-					InstantiateNewItem (-1, RightBound);
-					if (udpsender != null)
-						udpsender.requestStock (current);
-				} else if (active.transform.localPosition.x > RightBound) {
-					Destroy (active);
-					InstantiateNewItem (1, LeftBound);
-					if (udpsender != null)
-						udpsender.requestStock (current);
+				if (active != null) {
+					if (active.transform.localPosition.x < LeftBound) {
+						Destroy (active);
+						InstantiateNewItem (-1, RightBound);
+						if (udpsender != null)
+							udpsender.requestStock (current);
+					} else if (active.transform.localPosition.x > RightBound) {
+						Destroy (active);
+						InstantiateNewItem (1, LeftBound);
+						if (udpsender != null)
+							udpsender.requestStock (current);
+					}
 				}
 			}
 		} else {
@@ -63,6 +65,7 @@ public class ItemSelector : MonoBehaviour
 				Destroy (active);
 			}
 		}
+		SetNameAndPriceDisplay ();
 	}
 
 	void InstantiateNewItem (int delta, float xPos)
@@ -127,7 +130,8 @@ public class ItemSelector : MonoBehaviour
 		SetDrinkName ();
 	}
 
-	void EnableActive () {
+	void EnableActive ()
+	{
 		active.SetActive (true);
 	}
 
@@ -137,7 +141,7 @@ public class ItemSelector : MonoBehaviour
 			current = 0;
 			active.GetComponent<Levitate> ().enabled = false;
 			active.GetComponent<Rigidbody> ().useGravity = true;//velocity = Vector3.Scale (Vector3.down, moveVelocity * Time.deltaTime);
-			active.GetComponent<ChoosableItem> ().Fall(false);
+			active.GetComponent<ChoosableItem> ().Fall (false);
 			if (CurrentState.drink == DrinkType.COLD) {
 				active = Instantiate (Sodas [current], transform.parent);
 			} else {
@@ -151,9 +155,21 @@ public class ItemSelector : MonoBehaviour
 		}
 	}
 
+	void SetNameAndPriceDisplay ()
+	{
+		if (active != null) {
+			float price = active.GetComponent<ChoosableItem> ().getPrice ();
+			if (price != 0)
+				namePriceDisplay.text = active.GetComponent<ChoosableItem> ().name + "\n\u20AC" + price;
+		} else {
+			namePriceDisplay.text = "";
+		}
+	}
+
 	void SetDrinkName ()
 	{
-		DrinkNameText.GetComponent<Text> ().text = active.GetComponent<ChoosableItem> ().name;
+		if (active != null)
+			DrinkNameText.GetComponent<Text> ().text = active.GetComponent<ChoosableItem> ().name;
 	}
 
 	public ChoosableItem getCurrentItem ()

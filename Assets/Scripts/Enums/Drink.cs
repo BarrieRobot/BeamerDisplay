@@ -4,7 +4,10 @@ public enum Drink
 {
 	//Order of items must match order in database
 	COFFEE,
-	COLA,
-	FANTA,
-	CAPPUCHINO
+	CAPPUCHINO,
+	HOTWATER,
+	CAFFEEAULAIT,
+	MINUTEMAID,
+	COCACOLA,
+	FANTA
 }

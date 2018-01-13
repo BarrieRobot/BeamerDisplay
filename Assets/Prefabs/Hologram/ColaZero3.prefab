@@ -476,6 +476,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce67c1601de264766aefccee8aa7d383, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: Coca Cola Zero
+  name: Minute Maid
   type: 1
-  drink: 1
+  drink: 4
