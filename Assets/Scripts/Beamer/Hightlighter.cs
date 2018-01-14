@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Hightlighter : MonoBehaviour
 {
@@ -23,6 +24,9 @@ public class Hightlighter : MonoBehaviour
 	public GameObject CancelChoice;
 	public GameObject NewOrder;
 	public GameObject MinigameScore;
+
+	public GameObject OrdersFoundText;
+	public GameObject FoundOrdersList;
 
 	public GameObject HotDrinkIndicatorActive;
 	public GameObject ColdDrinkIndicatorActive;
@@ -55,6 +59,7 @@ public class Hightlighter : MonoBehaviour
 		case State.CHOOSING_CATEGORY:
 			DisableAll ();
 			enableCategoryButtons ();
+			displayIncompleteOrders ();
 			break;
 		case State.SELECTING:
 			DisableAll ();
@@ -72,6 +77,20 @@ public class Hightlighter : MonoBehaviour
 			break;
 		default:
 			break;
+		}
+	}
+
+	public void displayIncompleteOrders ()
+	{
+		if (DatabaseManager.ordersFound) {
+			SelectTypeInfo.SetActive (false);
+			OrdersFoundText.SetActive (true);
+			FoundOrdersList.SetActive (true);
+			string text = "";
+			foreach (Order order in DatabaseManager.lastReceivedOrders) {
+				text += order.item + " om " + order.orderTime + "\n";
+			}
+			FoundOrdersList.GetComponent<Text> ().text = text;
 		}
 	}
 
@@ -143,10 +162,10 @@ public class Hightlighter : MonoBehaviour
 
 	public void enableCategoryButtons ()
 	{
-		RightHoleIndication.SetActive (false);
+		/*RightHoleIndication.SetActive (false);
 		LeftHoleIndication.SetActive (false);
 		ScanTagInfo.SetActive (false);
-
+*/
 		ColdDrinkIndicatorActive.SetActive (true);
 		HotDrinkIndicatorActive.SetActive (true);
 		SelectTypeInfo.SetActive (true);
@@ -175,5 +194,8 @@ public class Hightlighter : MonoBehaviour
 		CancelChoice.SetActive (false);
 		NewOrder.SetActive (false);
 		MinigameScore.SetActive (false);
+
+		OrdersFoundText.SetActive (false);
+		FoundOrdersList.SetActive (false);
 	}
 }

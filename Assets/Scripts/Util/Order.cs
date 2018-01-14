@@ -5,8 +5,8 @@ using System.Runtime.Serialization;
 
 public class Order
 {
-	string orderTime;
-	string item;
+	public string orderTime;
+	public string item;
 
 	public Order (string time, string item)
 	{

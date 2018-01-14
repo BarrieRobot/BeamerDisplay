@@ -47,6 +47,7 @@ public class NFCValidator : MonoBehaviour
 		case State.WAIT_FOR_NFC:
 			currentActiveNFCID = scannedID;
 			CurrentState.currentState = State.CHOOSING_CATEGORY;
+			databaseManager.getExistingOrders (scannedID);
 			break;
 		case State.CONFIRMING:
 			if (scannedID == currentActiveNFCID) {
