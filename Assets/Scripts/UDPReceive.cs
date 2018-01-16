@@ -115,7 +115,7 @@ public class UDPReceive : MonoBehaviour
 			} else if (data ["order"] != null) {
 				Debug.Log ("Order is finished");
 				if (CurrentState.currentState == State.PREPARING) {
-					CurrentState.currentState = State.WAIT_FOR_NFC;
+					CurrentState.currentState = State.COMPLETED;
 				}
 			} else {
 				Debug.LogError ("Invalid data received: " + data);

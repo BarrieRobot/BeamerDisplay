@@ -19,12 +19,19 @@ public class DatabaseManager : MonoBehaviour
 	public static List<Order> lastReceivedOrders;
 	public static Dictionary<int, float> prices;
 	public static bool ordersFound = false;
+	private bool internetworking = true;
 
 	void Start ()
 	{
-		firebase = Firebase.CreateNew ("iona-4d244.firebaseio.com", "dUS0OWpxo7cGor2C81N2ffPbvliYQIc69jLDTO5m");
-		// Init callbacks
-		/*firebase.OnGetSuccess += GetOKHandler;
+		StartCoroutine (checkInternetConnection ((isConnected) => {
+			if (!isConnected) {
+				//Debug.LogError ("Error. Check internet connection!");
+				internetworking = false;
+			} else {
+				internetworking = true;
+				firebase = Firebase.CreateNew ("iona-4d244.firebaseio.com", "dUS0OWpxo7cGor2C81N2ffPbvliYQIc69jLDTO5m");
+				// Init callbacks
+				/*firebase.OnGetSuccess += GetOKHandler;
 		firebase.OnGetFailed += GetFailHandler;
 		firebase.OnSetSuccess += SetOKHandler;
 		firebase.OnSetFailed += SetFailHandler;
@@ -35,19 +42,35 @@ public class DatabaseManager : MonoBehaviour
 		firebase.OnDeleteSuccess += DelOKHandler;
 		firebase.OnDeleteFailed += DelFailHandler;
 */
-		barrie = firebase.Child ("Barrie", true);
-		orders = firebase.Child ("shared", true).Child ("orders", true);
+				barrie = firebase.Child ("Barrie", true);
+				orders = firebase.Child ("shared", true).Child ("orders", true);
 
-		lastReceivedOrders = new List<Order> ();
+				lastReceivedOrders = new List<Order> ();
 
-		// Make observer on "last update" time stamp
-		FirebaseObserver observer = new FirebaseObserver (barrie, 1f);
-		observer.OnChange += (Firebase sender, DataSnapshot snapshot) => {
-			DoDebug ("[OBSERVER] Last updated changed to: " + snapshot.Value<long> ());
-		};
-		observer.Start ();
-		//getExistingOrders (9999);
-		getPrices ();
+				// Make observer on "last update" time stamp
+				//getExistingOrders (9999);
+				getPrices ();
+			}
+		}));
+	}
+
+	IEnumerator checkInternetConnection (Action<bool> action)
+	{
+		WWW www = new WWW ("http://google.com");
+		yield return www;
+		if (www.error != null) {
+			action (false);
+		} else {
+			action (true);
+		}
+	}
+
+	void OnGUI ()
+	{
+		if (!internetworking) {
+			GUI.skin.textField.fontSize = 20;
+			GUI.TextField (new Rect (Screen.width / 2 - 125, Screen.height / 2 - 150, 250, 30), "Geen internet verbinding");
+		}
 	}
 	
 	// Update is called once per frame
@@ -56,26 +79,63 @@ public class DatabaseManager : MonoBehaviour
 
 	}
 
-	public void insertOrder (int nfcID, Drink drink, string name = "")
+	public void insertOrder (int nfcID, int drinkid, string name = "")
 	{
-		Firebase myOrders = orders.Child ("" + nfcID);
-		myOrders.Push ("{ \"drink\": \"" + (int)drink + "\", \"name\": \"" + name + "\", \"time\": \"" + System.DateTime.Now.ToString ("dd/MM/yyyy HH:mm:ss") + "\", \"completed\": \"" + "true" + "\" }", true); //true makes it create child objects
+		if (internetworking) {
+			Firebase myOrders = orders.Child ("" + nfcID);
+			myOrders.Push ("{ \"drink\": \"" + drinkid + "\", \"name\": \"" + name + "\", \"time\": \"" + System.DateTime.Now.ToString ("dd/MM/yyyy HH:mm:ss") + "\", \"completed\": \"" + "true" + "\" }", true); //true makes it create child objects
+		} else {
+			StartCoroutine (checkInternetConnection ((isConnected) => {
+				if (!isConnected) {
+					//Debug.LogError ("Error. Check internet connection!");
+					internetworking = false;
+				} else {
+					internetworking = true;
+					getPrices ();
+				}
+			}));
+		}
 	}
 
-	public List<Order> getExistingOrders (int nfcID)
+	public void getExistingOrders (int nfcID)
 	{
-		ordersFound = false;
-		Firebase myOrders = orders.Child ("" + nfcID);
-		myOrders.OnGetSuccess += GetOrdersHandler;
-		myOrders.GetValue ();
-		return null;
+		if (internetworking) {
+			if (orders != null) {
+				ordersFound = false;
+				Firebase myOrders = orders.Child ("" + nfcID);
+				myOrders.OnGetSuccess += GetOrdersHandler;
+				myOrders.GetValue ();
+			} 
+		} else {
+			StartCoroutine (checkInternetConnection ((isConnected) => {
+				if (!isConnected) {
+					//Debug.LogError ("Error. Check internet connection!");
+					internetworking = false;
+				} else {
+					internetworking = true;
+					getPrices ();
+				}
+			}));
+		}
 	}
 
 	public void getPrices ()
 	{
-		Firebase options = barrie.Child ("options");
-		options.OnGetSuccess += GetPricesHandler;
-		options.GetValue ();
+		if (internetworking) {
+			Firebase options = barrie.Child ("options");
+			options.OnGetSuccess += GetPricesHandler;
+			options.GetValue ();
+		} else {
+			StartCoroutine (checkInternetConnection ((isConnected) => {
+				if (!isConnected) {
+					//Debug.LogError ("Error. Check internet connection!");
+					internetworking = false;
+				} else {
+					internetworking = true;
+					getPrices ();
+				}
+			}));
+		}
 	}
 
 	static void GetPricesHandler (Firebase sender, DataSnapshot snapshot)
@@ -94,18 +154,17 @@ public class DatabaseManager : MonoBehaviour
 	{
 		DoDebug ("[OK] Get from key: <" + sender.FullKey + ">");
 		DoDebug ("[OK] Raw Json: " + snapshot.RawJson);
-		Dictionary<string, object> dict = snapshot.Value<Dictionary<string, object>> ();
-		List<string> keys = snapshot.Keys;
-		lastReceivedOrders.Clear ();
-		JSONObject orders = JSON.Parse (snapshot.RawJson).AsObject;
-		Debug.Log (orders.Count);
 		bool incompleteFound = false;
-		for (int i = 0; i < orders.Count; i++) {
-			JSONObject order = orders [i].AsObject;
-			if (!order ["completed"].AsBool) {
-				incompleteFound = true;
-				Debug.LogError (order);
-				lastReceivedOrders.Add (new Order (order ["time"], order ["name"]));
+		lastReceivedOrders.Clear ();
+		if (JSON.Parse (snapshot.RawJson) != null) {
+			List<string> keys = snapshot.Keys;
+			JSONObject orders = JSON.Parse (snapshot.RawJson).AsObject;
+			for (int i = 0; i < orders.Count; i++) {
+				JSONObject order = orders [i].AsObject;
+				if (!order ["completed"].AsBool) {
+					incompleteFound = true;
+					lastReceivedOrders.Add (new Order (order ["time"], order ["name"], order ["drink"].AsInt));
+				}
 			}
 		}
 		if (incompleteFound)

@@ -7,10 +7,12 @@ public class Order
 {
 	public string orderTime;
 	public string item;
+	public int itemid;
 
-	public Order (string time, string item)
+	public Order (string time, string item, int itemid)
 	{
 		this.orderTime = time;
 		this.item = item;
+		this.itemid = itemid;
 	}
 }

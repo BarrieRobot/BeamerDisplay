@@ -61,6 +61,10 @@ public class FeedbackProvider : MonoBehaviour
 				Vector2 basketLoc = getAverage (basketLocations);
 				GameObject basket = Instantiate (MinigameBasket, new Vector2 (scalePointX (basketLoc.x), invert (scalePointY (basketLoc.y))), Quaternion.identity);
 				activeFeedback.Add (basket);
+			} else {
+				Vector2 basketLoc = new Vector2 (0.5f, 0.85f);
+				GameObject basket = Instantiate (MinigameBasket, new Vector2 (scalePointX (basketLoc.x), invert (scalePointY (basketLoc.y))), Quaternion.identity);
+				activeFeedback.Add (basket);
 			}
 		} else {
 			foreach (Vector2 location in touches) {
