@@ -14,6 +14,26 @@ public class NFCValidator : MonoBehaviour
 	public float inactivityTimer = 0;
 	private float ProgressbarFractionOfResetTime = 4;
 
+	void OnGUI ()
+	{
+		if (GUI.Button (new Rect (Screen.width / 2 - 120, Screen.height - 150, 80, 100), "ColdDrink")) {
+			/*if (CurrentState.currentState == State.CHOOSING_CATEGORY) {
+				EventManager.ExecuteCategoryChosen ();
+			}*/
+			CurrentState.currentState = State.SELECTING;
+			CurrentState.drink = DrinkType.COLD;
+			EventManager.ExecuteDrinkTypeChange ();
+		}
+		if (GUI.Button (new Rect (Screen.width / 2, Screen.height - 150, 80, 100), "HotDrink")) {
+			/*if (CurrentState.currentState == State.CHOOSING_CATEGORY) {
+				EventManager.ExecuteCategoryChosen ();
+			}*/
+			CurrentState.currentState = State.SELECTING;
+			CurrentState.drink = DrinkType.HOT;
+			EventManager.ExecuteDrinkTypeChange ();
+		}
+	}
+
 
 	// Use this for initialization
 	void Start ()
@@ -50,9 +70,9 @@ public class NFCValidator : MonoBehaviour
 			databaseManager.getExistingOrders (scannedID);
 			break;
 		case State.CONFIRMING:
-			if (scannedID == currentActiveNFCID) {
-				udpsender.SendString ("order: " + itemSelector.getCurrentItem ().drink);
-				databaseManager.insertOrder (scannedID, itemSelector.getCurrentItem ().drink, itemSelector.getCurrentItem ().name);
+			if (scannedID == currentActiveNFCID) { //TODO change to CurrentSelection
+				udpsender.SendString ("order: " + CurrentSelection.selectionid);
+				databaseManager.insertOrder (scannedID, CurrentSelection.selectionid, CurrentSelection.selectionname);
 				CurrentState.currentState = State.PREPARING;
 			} else {
 				Debug.Log ("CONFIRM FAILED");
