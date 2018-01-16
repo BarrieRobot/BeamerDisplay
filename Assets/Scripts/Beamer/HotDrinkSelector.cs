@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class HotDrinkSelector : MonoBehaviour
 {
+	public Animator animator;
 
 	void OnTriggerEnter2D (Collider2D other)
 	{
-		if (other.name.Contains ("Feedback")) {
-		/*	if (CurrentState.currentState == State.CHOOSING_CATEGORY) {
+		if (other.name.Contains ("Feedback") && animator.GetCurrentAnimatorStateInfo (0).normalizedTime >= 1.0f) {
+			/*	if (CurrentState.currentState == State.CHOOSING_CATEGORY) {
 				EventManager.ExecuteCategoryChosen ();
 			}*/
 			Debug.Log ("Hot drink triggered");
@@ -21,7 +22,7 @@ public class HotDrinkSelector : MonoBehaviour
 	//TODO remove debug code
 	void OnGUI ()
 	{
-		if (GUI.Button (new Rect (Screen.width / 2, Screen.height - 150, 80, 100), "HotDrink")) {
+		if (GUI.Button (new Rect (Screen.width / 2, Screen.height - 150, 80, 100), "HotDrink") && animator.GetCurrentAnimatorStateInfo (0).normalizedTime >= 1.0f) {
 			/*if (CurrentState.currentState == State.CHOOSING_CATEGORY) {
 				EventManager.ExecuteCategoryChosen ();
 			}*/
