@@ -16,9 +16,9 @@ public class Spawner : MonoBehaviour
 	float timer = 0;
 
 
-	float spawnY = 250;
-	float spawnXmin = -200;
-	float spawnXmax = 200;
+	public float spawnY = 250;
+	public float spawnXmin = -200;
+	public float spawnXmax = 200;
 	// Use this for initialization
 	void Start ()
 	{

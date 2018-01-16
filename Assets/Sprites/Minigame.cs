@@ -39,6 +39,6 @@ public class Minigame : MonoBehaviour
 	public void IncrementScore ()
 	{
 		score += 1;
-		scoreText.text = "Score: " + score;
+		scoreText.text = "Minigame score: " + score;
 	}
 }

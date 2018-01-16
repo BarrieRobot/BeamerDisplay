@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Globalization;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -89,6 +90,8 @@ public class ItemSelector : MonoBehaviour
 		default:
 			break;
 		}
+		CurrentSelection.selectionid = (int)active.GetComponent <ChoosableItem> ().drink;
+		CurrentSelection.selectionname = active.GetComponent <ChoosableItem> ().name;
 	}
 
 	void onEnable ()
@@ -117,9 +120,10 @@ public class ItemSelector : MonoBehaviour
 
 	public void FallDown (int i)
 	{
-		if (CurrentState.currentState == State.PREPARING) {
+		if (CurrentState.currentState == State.PREPARING && active != null) {
 			active.GetComponent<Rigidbody> ().useGravity = true;//velocity = Vector3.Scale (Vector3.down, moveVelocity * Time.deltaTime);
-			active.GetComponent<Levitate> ().enabled = false;
+			active.GetComponent<Rigidbody> ().isKinematic = false;//velocity = Vector3.Scale (Vector3.down, moveVelocity * Time.deltaTime);
+			active.GetComponentInChildren<Levitate> ().enabled = false;
 		}
 	}
 
@@ -139,28 +143,35 @@ public class ItemSelector : MonoBehaviour
 	{
 		if (active != null && active.GetComponent<ChoosableItem> ().type != CurrentState.drink) {
 			current = 0;
-			active.GetComponent<Levitate> ().enabled = false;
+			active.GetComponentInChildren<Levitate> ().enabled = false;
+			active.GetComponent<Rigidbody> ().isKinematic = false;
 			active.GetComponent<Rigidbody> ().useGravity = true;//velocity = Vector3.Scale (Vector3.down, moveVelocity * Time.deltaTime);
 			active.GetComponent<ChoosableItem> ().Fall (false);
+			active.GetComponent<ChoosableItem> ().stopGravity ();
+
 			if (CurrentState.drink == DrinkType.COLD) {
 				active = Instantiate (Sodas [current], transform.parent);
 			} else {
 				active = Instantiate (Coffees [current], transform.parent);
 			}
 			active.transform.localPosition = new Vector3 (0, 500, active.transform.localPosition.z);
-			active.GetComponent<Levitate> ().enabled = false;
+			active.GetComponentInChildren<Levitate> ().enabled = false;
 			active.GetComponent<Rigidbody> ().useGravity = true;//velocity = Vector3.Scale (Vector3.down, moveVelocity * Time.deltaTime);
 			active.GetComponent<ChoosableItem> ().Fall (true);//Destroy (active);
 			//InstantiateNewItem (0, 0);
+			CurrentSelection.selectionid = (int)active.GetComponent <ChoosableItem> ().drink;
+			CurrentSelection.selectionname = active.GetComponent <ChoosableItem> ().name;
 		}
 	}
 
 	void SetNameAndPriceDisplay ()
 	{
-		if (active != null) {
+		if (active != null && CurrentState.currentState != State.CONFIRMING && CurrentState.currentState != State.CONFIRMED) {
 			float price = active.GetComponent<ChoosableItem> ().getPrice ();
-			if (price != 0)
-				namePriceDisplay.text = active.GetComponent<ChoosableItem> ().name + "\n\u20AC" + price;
+			if (price != 0) {
+				CultureInfo nl = CultureInfo.CreateSpecificCulture ("nl-NL");
+				namePriceDisplay.text = active.GetComponent<ChoosableItem> ().name + "\n\u20AC" + price.ToString ("0.00", nl);
+			}
 		} else {
 			namePriceDisplay.text = "";
 		}
@@ -171,9 +182,9 @@ public class ItemSelector : MonoBehaviour
 		if (active != null)
 			DrinkNameText.GetComponent<Text> ().text = active.GetComponent<ChoosableItem> ().name;
 	}
-
+	/*
 	public ChoosableItem getCurrentItem ()
 	{
 		return active != null ? active.GetComponent<ChoosableItem> () : null;
-	}
+	}*/
 }

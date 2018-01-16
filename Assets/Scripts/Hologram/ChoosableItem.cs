@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,7 +24,11 @@ public class ChoosableItem : MonoBehaviour
 
 	void Start ()
 	{
-		price = DatabaseManager.prices [(int)drink];
+		try {
+			price = DatabaseManager.prices [(int)drink];
+		} catch (Exception e) {
+			price = 0;
+		}
 	}
 
 	void Update ()
@@ -32,7 +37,8 @@ public class ChoosableItem : MonoBehaviour
 			Destroy (gameObject);
 		if (falling && gameObject.transform.localPosition.y < 1) {
 			GetComponent<Rigidbody> ().useGravity = false;//velocity = Vector3.Scale (Vector3.down, moveVelocity * Time.deltaTime);
-			GetComponent<Levitate> ().enabled = true;
+			GetComponent<Rigidbody> ().isKinematic = true;//velocity = Vector3.Scale (Vector3.down, moveVelocity * Time.deltaTime);
+			GetComponentInChildren<Levitate> ().enabled = true;
 			falling = false;
 		}
 		if (gravitating && (gameObject.transform.localPosition.x > 1 || gameObject.transform.localPosition.x < -1)) {
@@ -70,6 +76,9 @@ public class ChoosableItem : MonoBehaviour
 
 	public void moveOut (Direction dir)
 	{
+		GetComponent<Rigidbody> ().isKinematic = false;
+		GetComponent<Rigidbody> ().useGravity = false;
+
 		movedir = dir;
 		moveout = true;
 	}
