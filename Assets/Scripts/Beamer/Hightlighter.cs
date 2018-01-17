@@ -117,6 +117,7 @@ public class Hightlighter : MonoBehaviour
 					texts [i].text = "" + order.item;//+ " om\n" + order.orderTime;
 					texts [i].gameObject.SetActive (true);
 					orders [i].drinkid = order.itemid;
+					orders [i].setDrinkType (order.drinkType);
 					orders [i].setDrinkName (order.item);
 				}
 				i++;
@@ -146,6 +147,7 @@ public class Hightlighter : MonoBehaviour
 	public void enableConfirmNFC ()
 	{
 		SelectedItemName.SetActive (true);
+		ScanTagInfo.SetActive (true);
 		//ScanToVerify.SetActive (true);
 		CancelChoice.SetActive (true);
 	}

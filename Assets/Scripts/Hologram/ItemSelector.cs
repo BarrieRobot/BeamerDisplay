@@ -31,7 +31,13 @@ public class ItemSelector : MonoBehaviour
 		EventManager.OnNFCScanned += FallDown;
 		EventManager.OnShowOver += EnableActive;
 	}
-	
+
+
+	public void SetInActionTrue ()
+	{
+		inAction = true;
+	}
+
 	// Update is called once per frame
 	void Update ()
 	{
@@ -78,14 +84,14 @@ public class ItemSelector : MonoBehaviour
 			if (current < 0)
 				current = Coffees.Length - 1;
 			active = Instantiate (Coffees [current], transform.parent);
-			active.transform.localPosition = new Vector3 (xPos, active.transform.localPosition.y, active.transform.localPosition.z);
+			active.transform.localPosition = new Vector3 (xPos, -10, 0);
 			break;
 		case DrinkType.COLD:
 			current = current % Sodas.Length;
 			if (current < 0)
 				current = Sodas.Length - 1;
 			active = Instantiate (Sodas [current], transform.parent);
-			active.transform.localPosition = new Vector3 (xPos, active.transform.localPosition.y, active.transform.localPosition.z);
+			active.transform.localPosition = new Vector3 (xPos, -10, 0);
 			break;
 		default:
 			break;
@@ -136,7 +142,18 @@ public class ItemSelector : MonoBehaviour
 
 	void EnableActive ()
 	{
-		active.SetActive (true);
+		if (active == null) {
+			current = 0;
+			if (CurrentState.drink == DrinkType.COLD) {
+				Debug.Log ("instantiatinh " + CurrentSelection.selectionid);
+				InstantiateNewItem (CurrentSelection.selectionid - Coffees.Length, 0);
+			} else {
+				Debug.Log ("instantiatinh " + CurrentSelection.selectionid);
+				InstantiateNewItem (CurrentSelection.selectionid, 0);
+			}
+		} else {
+			active.SetActive (true);
+		}
 	}
 
 	void ChangeType ()
@@ -171,6 +188,12 @@ public class ItemSelector : MonoBehaviour
 			if (price != 0) {
 				CultureInfo nl = CultureInfo.CreateSpecificCulture ("nl-NL");
 				namePriceDisplay.text = active.GetComponent<ChoosableItem> ().name + "\n\u20AC" + price.ToString ("0.00", nl);
+			}
+		} else if (active != null && CurrentState.currentState == State.CONFIRMING) {
+			float price = active.GetComponent<ChoosableItem> ().getPrice ();
+			if (price != 0) {
+				CultureInfo nl = CultureInfo.CreateSpecificCulture ("nl-NL");
+				namePriceDisplay.text = "\n\u20AC" + price.ToString ("0.00", nl);
 			}
 		} else {
 			namePriceDisplay.text = "";

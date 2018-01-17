@@ -20,6 +20,8 @@ public class DatabaseManager : MonoBehaviour
 	public static Dictionary<int, float> prices;
 	public static bool ordersFound = false;
 	private bool internetworking = true;
+	static List<int> coldlist = new List<int> (new int[] { 4, 5, 6 });
+	static List<int> hotlist = new List<int> (new int[]{ 0, 1, 2, 3 });
 
 	void Start ()
 	{
@@ -30,25 +32,9 @@ public class DatabaseManager : MonoBehaviour
 			} else {
 				internetworking = true;
 				firebase = Firebase.CreateNew ("iona-4d244.firebaseio.com", "dUS0OWpxo7cGor2C81N2ffPbvliYQIc69jLDTO5m");
-				// Init callbacks
-				/*firebase.OnGetSuccess += GetOKHandler;
-		firebase.OnGetFailed += GetFailHandler;
-		firebase.OnSetSuccess += SetOKHandler;
-		firebase.OnSetFailed += SetFailHandler;
-		firebase.OnUpdateSuccess += UpdateOKHandler;
-		firebase.OnUpdateFailed += UpdateFailHandler;
-		firebase.OnPushSuccess += PushOKHandler;
-		firebase.OnPushFailed += PushFailHandler;
-		firebase.OnDeleteSuccess += DelOKHandler;
-		firebase.OnDeleteFailed += DelFailHandler;
-*/
 				barrie = firebase.Child ("Barrie", true);
 				orders = firebase.Child ("shared", true).Child ("orders", true);
-
 				lastReceivedOrders = new List<Order> ();
-
-				// Make observer on "last update" time stamp
-				//getExistingOrders (9999);
 				getPrices ();
 			}
 		}));
@@ -69,6 +55,7 @@ public class DatabaseManager : MonoBehaviour
 	{
 		if (!internetworking) {
 			GUI.skin.textField.fontSize = 20;
+			GUIUtility.ScaleAroundPivot (new Vector2 (-1, 1), new Vector2 (Screen.width / 2, Screen.height / 2)); 
 			GUI.TextField (new Rect (Screen.width / 2 - 125, Screen.height / 2 - 150, 250, 30), "Geen internet verbinding");
 		}
 	}
@@ -87,10 +74,13 @@ public class DatabaseManager : MonoBehaviour
 		} else {
 			StartCoroutine (checkInternetConnection ((isConnected) => {
 				if (!isConnected) {
-					//Debug.LogError ("Error. Check internet connection!");
 					internetworking = false;
 				} else {
 					internetworking = true;
+					firebase = Firebase.CreateNew ("iona-4d244.firebaseio.com", "dUS0OWpxo7cGor2C81N2ffPbvliYQIc69jLDTO5m");
+					barrie = firebase.Child ("Barrie", true);
+					orders = firebase.Child ("shared", true).Child ("orders", true);
+					lastReceivedOrders = new List<Order> ();
 					getPrices ();
 				}
 			}));
@@ -109,10 +99,13 @@ public class DatabaseManager : MonoBehaviour
 		} else {
 			StartCoroutine (checkInternetConnection ((isConnected) => {
 				if (!isConnected) {
-					//Debug.LogError ("Error. Check internet connection!");
 					internetworking = false;
 				} else {
 					internetworking = true;
+					firebase = Firebase.CreateNew ("iona-4d244.firebaseio.com", "dUS0OWpxo7cGor2C81N2ffPbvliYQIc69jLDTO5m");
+					barrie = firebase.Child ("Barrie", true);
+					orders = firebase.Child ("shared", true).Child ("orders", true);
+					lastReceivedOrders = new List<Order> ();
 					getPrices ();
 				}
 			}));
@@ -128,10 +121,13 @@ public class DatabaseManager : MonoBehaviour
 		} else {
 			StartCoroutine (checkInternetConnection ((isConnected) => {
 				if (!isConnected) {
-					//Debug.LogError ("Error. Check internet connection!");
 					internetworking = false;
 				} else {
 					internetworking = true;
+					firebase = Firebase.CreateNew ("iona-4d244.firebaseio.com", "dUS0OWpxo7cGor2C81N2ffPbvliYQIc69jLDTO5m");
+					barrie = firebase.Child ("Barrie", true);
+					orders = firebase.Child ("shared", true).Child ("orders", true);
+					lastReceivedOrders = new List<Order> ();
 					getPrices ();
 				}
 			}));
@@ -163,7 +159,8 @@ public class DatabaseManager : MonoBehaviour
 				JSONObject order = orders [i].AsObject;
 				if (!order ["completed"].AsBool) {
 					incompleteFound = true;
-					lastReceivedOrders.Add (new Order (order ["time"], order ["name"], order ["drink"].AsInt));
+					DrinkType dtype = coldlist.IndexOf (order ["drink"].AsInt) != -1 ? DrinkType.COLD : DrinkType.HOT;
+					lastReceivedOrders.Add (new Order (order ["time"], order ["name"], order ["drink"].AsInt, dtype));
 				}
 			}
 		}
