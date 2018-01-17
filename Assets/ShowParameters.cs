@@ -34,8 +34,8 @@ public class ShowParameters : MonoBehaviour
 	void OnEnable ()
 	{
 		EventManager.OnDrinkTypeChange += ExitShow;
-		xradius = 300;
-		zradius = 250;
+		xradius = 350;
+		zradius = 300;
 		speed = 0.53f;
 	}
 
