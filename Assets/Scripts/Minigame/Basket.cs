@@ -19,7 +19,7 @@ public class Basket : MonoBehaviour
 
 	void OnTriggerEnter2D (Collider2D other)
 	{
-		if (other.gameObject.name.Equals ("bean(Clone)")) {
+		if (other.gameObject.name.Equals ("bean(Clone)") || other.gameObject.name.Contains ("Sugar")) {
 			GameObject.Find ("MiniGame").GetComponent <Minigame> ().IncrementScore ();
 			Destroy (other.gameObject);
 		}

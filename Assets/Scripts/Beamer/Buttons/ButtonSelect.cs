@@ -5,6 +5,9 @@ using UnityEngine;
 public class ButtonSelect : MonoBehaviour
 {
 
+	float touchedTime = 0;
+	bool touch = false;
+
 	//TODO remove debug code
 	void OnGUI ()
 	{
@@ -13,10 +16,26 @@ public class ButtonSelect : MonoBehaviour
 		}
 	}
 
+	void FixedUpdate ()
+	{
+		if (touch) {
+			touchedTime += Time.fixedDeltaTime;
+			if (touchedTime > 0.1) {
+				touch = false;
+				SpriteRenderer renderer = GetComponent<SpriteRenderer> ();
+				renderer.color = new Color (1f, 1f, 1f, 1f); 
+				EventManager.ExecuteSelect ();
+			}
+		}
+	}
+
 	void OnTriggerEnter2D (Collider2D other)
 	{
 		if (other.name.Contains ("Feedback")) {
-			EventManager.ExecuteSelect ();
+			touchedTime = 0;
+			touch = true;
+			SpriteRenderer renderer = GetComponent<SpriteRenderer> ();
+			renderer.color = new Color (0.5f, 0.5f, 0.5f, 1f); // Set to opaque gray
 		}
 	}
 }
