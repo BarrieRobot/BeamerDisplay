@@ -35,7 +35,7 @@ public class ChoosableItem : MonoBehaviour
 	{
 		if (gameObject.transform.localPosition.y < -500)
 			Destroy (gameObject);
-		if (falling && gameObject.transform.localPosition.y < -10) {
+		if (falling && gameObject.transform.localPosition.y < -20) {
 			GetComponent<Rigidbody> ().useGravity = false;//velocity = Vector3.Scale (Vector3.down, moveVelocity * Time.deltaTime);
 			GetComponent<Rigidbody> ().isKinematic = true;//velocity = Vector3.Scale (Vector3.down, moveVelocity * Time.deltaTime);
 			GetComponentInChildren<Levitate> ().enabled = true;

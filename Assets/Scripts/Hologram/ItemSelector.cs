@@ -84,14 +84,14 @@ public class ItemSelector : MonoBehaviour
 			if (current < 0)
 				current = Coffees.Length - 1;
 			active = Instantiate (Coffees [current], transform.parent);
-			active.transform.localPosition = new Vector3 (xPos, -10, 0);
+			active.transform.localPosition = new Vector3 (xPos, -20, 0);
 			break;
 		case DrinkType.COLD:
 			current = current % Sodas.Length;
 			if (current < 0)
 				current = Sodas.Length - 1;
 			active = Instantiate (Sodas [current], transform.parent);
-			active.transform.localPosition = new Vector3 (xPos, -10, 0);
+			active.transform.localPosition = new Vector3 (xPos, -20, 0);
 			break;
 		default:
 			break;

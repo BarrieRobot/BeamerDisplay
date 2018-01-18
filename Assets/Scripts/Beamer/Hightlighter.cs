@@ -96,7 +96,7 @@ public class Hightlighter : MonoBehaviour
 	public void incrementCompleteTimer ()
 	{
 		completetimer += Time.deltaTime;
-		if (completetimer > 5) {
+		if (completetimer > 10) {
 			completetimer = 0;
 			CurrentState.currentState = State.WAIT_FOR_NFC;
 		}
