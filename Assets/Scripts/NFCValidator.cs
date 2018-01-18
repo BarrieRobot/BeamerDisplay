@@ -70,13 +70,13 @@ public class NFCValidator : MonoBehaviour
 			databaseManager.getExistingOrders (scannedID);
 			break;
 		case State.CONFIRMING:
-			if (scannedID == currentActiveNFCID) { //TODO change to CurrentSelection
-				udpsender.SendString ("order: " + CurrentSelection.selectionid);
-				databaseManager.insertOrder (scannedID, CurrentSelection.selectionid, CurrentSelection.selectionname);
-				CurrentState.currentState = State.PREPARING;
-			} else {
-				Debug.Log ("CONFIRM FAILED");
-			}
+			//if (scannedID == currentActiveNFCID) { //TODO change to CurrentSelection
+			udpsender.SendString ("order: " + CurrentSelection.selectionid);
+			databaseManager.insertOrder (scannedID, CurrentSelection.selectionid, CurrentSelection.selectionname);
+			CurrentState.currentState = State.PREPARING;
+			//} else {
+			//	Debug.Log ("CONFIRM FAILED");
+			//}
 			break;
 		default:
 			break;

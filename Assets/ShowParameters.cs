@@ -22,6 +22,8 @@ public class ShowParameters : MonoBehaviour
 	private float startxradius;
 	private float startzradius;
 
+	private bool inanimation = false;
+
 	void Start ()
 	{
 		EventManager.OnDrinkTypeChange += ExitShow;
@@ -46,7 +48,7 @@ public class ShowParameters : MonoBehaviour
 
 	public void ExitShow ()
 	{
-		if (isActiveAndEnabled) {
+		if (isActiveAndEnabled && !inanimation) {
 			speed = speed * 1.5f;
 			StartCoroutine ("speedUp");	
 		}
@@ -54,6 +56,7 @@ public class ShowParameters : MonoBehaviour
 
 	IEnumerator speedUp ()
 	{
+		inanimation = true;
 		for (int i = 0; i < steps; i++) {
 			speed *= 1.08f;
 			xradius -= (xradreduce);
@@ -61,6 +64,7 @@ public class ShowParameters : MonoBehaviour
 			yield return new WaitForSeconds (interval);
 		}
 		EventManager.ExecuteShowOver ();
+		inanimation = false;
 		gameObject.SetActive (false);
 	}
 }
