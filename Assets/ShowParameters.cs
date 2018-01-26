@@ -57,8 +57,8 @@ public class ShowParameters : MonoBehaviour
 	IEnumerator speedUp ()
 	{
 		inanimation = true;
-		for (int i = 0; i < steps; i++) {
-			speed *= 1.08f;
+		for (int i = 0; i < steps + 20; i++) {
+			speed *= 1.1f;
 			xradius -= (xradreduce);
 			zradius -= (zradreduce);
 			yield return new WaitForSeconds (interval);

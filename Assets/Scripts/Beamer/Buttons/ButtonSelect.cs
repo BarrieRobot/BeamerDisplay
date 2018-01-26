@@ -11,7 +11,7 @@ public class ButtonSelect : MonoBehaviour
 	//TODO remove debug code
 	void OnGUI ()
 	{
-		if (GUI.Button (new Rect (Screen.width / 2 - 50, Screen.height / 2 - 30, 100, 30), "Select")) {
+		if (GUI.Button (new Rect (Screen.width / 2 - 50, 5, 100, 30), "Select")) {
 			EventManager.ExecuteSelect ();
 		}
 	}

@@ -16,21 +16,23 @@ public class NFCValidator : MonoBehaviour
 
 	void OnGUI ()
 	{
-		if (GUI.Button (new Rect (Screen.width / 2 - 120, Screen.height - 150, 80, 100), "ColdDrink")) {
-			/*if (CurrentState.currentState == State.CHOOSING_CATEGORY) {
+		if (CurrentState.currentState == State.CHOOSING_CATEGORY || CurrentState.currentState == State.SELECTING) {
+			if (GUI.Button (new Rect (Screen.width / 2 - 120, 10, 80, 50), "ColdDrink")) {
+				/*if (CurrentState.currentState == State.CHOOSING_CATEGORY) {
 				EventManager.ExecuteCategoryChosen ();
 			}*/
-			CurrentState.currentState = State.SELECTING;
-			CurrentState.drink = DrinkType.COLD;
-			EventManager.ExecuteDrinkTypeChange ();
-		}
-		if (GUI.Button (new Rect (Screen.width / 2, Screen.height - 150, 80, 100), "HotDrink")) {
-			/*if (CurrentState.currentState == State.CHOOSING_CATEGORY) {
+				CurrentState.currentState = State.SELECTING;
+				CurrentState.drink = DrinkType.COLD;
+				EventManager.ExecuteDrinkTypeChange ();
+			}
+			if (GUI.Button (new Rect (Screen.width / 2, 10, 80, 50), "HotDrink")) {
+				/*if (CurrentState.currentState == State.CHOOSING_CATEGORY) {
 				EventManager.ExecuteCategoryChosen ();
 			}*/
-			CurrentState.currentState = State.SELECTING;
-			CurrentState.drink = DrinkType.HOT;
-			EventManager.ExecuteDrinkTypeChange ();
+				CurrentState.currentState = State.SELECTING;
+				CurrentState.drink = DrinkType.HOT;
+				EventManager.ExecuteDrinkTypeChange ();
+			}
 		}
 	}
 
@@ -94,8 +96,8 @@ public class NFCValidator : MonoBehaviour
 			inactivityTimer += Time.deltaTime;
 		}
 		if (inactivityTimer > NFCTimeoutSeconds - NFCTimeoutSeconds / ProgressbarFractionOfResetTime) {
-			ResetProgressDisplay.SetActive (true);
-			ResetProgressDisplay.GetComponent <Image> ().fillAmount = (inactivityTimer - NFCTimeoutSeconds * ((ProgressbarFractionOfResetTime - 1) / ProgressbarFractionOfResetTime)) / (NFCTimeoutSeconds / ProgressbarFractionOfResetTime);
+			//ResetProgressDisplay.SetActive (true);
+			//ResetProgressDisplay.GetComponent <Image> ().fillAmount = (inactivityTimer - NFCTimeoutSeconds * ((ProgressbarFractionOfResetTime - 1) / ProgressbarFractionOfResetTime)) / (NFCTimeoutSeconds / ProgressbarFractionOfResetTime);
 		}
 		if (inactivityTimer > NFCTimeoutSeconds) {
 			currentActiveNFCID = 0;

@@ -84,7 +84,7 @@ public class FeedbackProvider : MonoBehaviour
 
 	private float scalePointY (float point)
 	{
-		return Mathf.Lerp (sceneBoundMinY, sceneBoundMaxY, point);
+		return Mathf.Lerp (sceneBoundMinY, sceneBoundMaxY, point) - 25; //Add offset cus we in a hurry
 	}
 
 	private float invert (float point)

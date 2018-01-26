@@ -7,7 +7,7 @@ public class ButtonNewOrder : MonoBehaviour
 
 	void OnGUI ()
 	{
-		if (GUI.Button (new Rect (Screen.width - 150, Screen.height / 2, 100, 30), "NEW")) {
+		if (GUI.Button (new Rect (Screen.width - 150, 5, 100, 30), "NEW")) {
 			CurrentState.currentState = State.CHOOSING_CATEGORY;
 		}
 	}

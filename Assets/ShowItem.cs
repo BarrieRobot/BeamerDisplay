@@ -21,7 +21,12 @@ public class ShowItem : MonoBehaviour
 		timer = startPositionPercentage / 100f * Mathf.PI * 2;
 		startPos = transform.localPosition;
 	}
-	
+
+	void OnEnable ()
+	{
+		timer = startPositionPercentage / 100f * Mathf.PI * 2;
+	}
+
 	// Update is called once per frame
 	void Update ()
 	{
